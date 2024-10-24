@@ -1,0 +1,47 @@
+﻿"Phrases"
+{
+	"announceff_chat_attack"
+	{
+		"#format"	"{1:d},{2:s},{3:d}"
+		"en"		"* {orange}You {default}did {blue}FF {default}to {olive}{2} {default}@ {1} HP ({3} in total)"
+		"chi"		"* {orange}你{default}对{olive}{2}{default}中出了 {blue} {1} {default}ml（累计 {olive}{3} {default}ml）"
+	}
+	"announceff_chat_attacked"
+	{
+		"en"		"* {olive}%s {default}did {blue}FF {default}to {orange}You {default}@ %d HP (%d in total)"
+		"chi"		"* {olive}%s{default}对{orange}你{default}中出了 {blue}%d {default}ml（累计 {olive}%d {default}ml）"
+	}
+	"announceff_chat_damagetotal"
+	{
+		"en"		"<{olive}FFAnnounce{default}> Total Damage: {olive}%d{default}"
+	}
+	"announceff_hint_attack"
+	{
+		"#format"	"{1:d},{2:s}"
+		"en"		"<FFAnnounce> You did {1} FF dmg to {2}"
+	}
+	"announceff_hint_attacked"
+	{
+		"en"		"<FFAnnounce> %s did %d FF dmg to you"
+	}
+	"announceff_printcenter_attack"
+	{
+		"#format"	"{1:d},{2:s}"
+		"en"		"<FFAnnounce> You did {1} FF dmg to {2}"
+	}
+	"announceff_printcenter_attacked"
+	{
+		"en"		"<FFAnnounce> %s did %d FF dmg to you"
+	}
+	"announceff_print_roundend_totaldamage"
+	{
+		"en"		"<{olive}FFAnnounce{default}> Total FF damage dealt to the players:"
+		"chi"		"<{olive}FFAnnounce{default}> 你对队友造成的总中出:"
+	}
+	"announceff_print_roundend_totaldamage_player"
+	{
+		"#format"	"{1:s},{2:d},{3:.0f}"
+		"en"		"{olive}{2}{default} dmg [{olive}{3}%%{default}] : {blue}{1}{default}"
+		"chi"		"{olive}{2}{default}点 [{olive}{3}%%{default}] : {blue}{1}{default}"
+	}
+}

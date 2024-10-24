@@ -1,0 +1,63 @@
+"Advertisements"
+{
+	"1"
+	{
+		"type"		"S"
+		"text"		"{LIGHTGREEN}[本章节地图]: {GREEN}{CURRENTMAP} \n{LIGHTGREEN}[服务器时间]: {GREEN}{TIME24} - {DATE}"
+	}
+	"2"
+	{
+		"type"		"S"
+		"text"		"{GREEN}!away{LIGHTGREEN}闲置 {GREEN}!join{LIGHTGREEN}加入 {GREEN}!slots{LIGHTGREEN}开位 \n{GREEN}!xx{LIGHTGREEN}模式查询 {GREEN}!buy{LIGHTGREEN}商店 {GREEN}!vote{LIGHTGREEN}投票 \n{GREEN}!votespec{LIGHTGREEN}强制旁观"
+	}
+	"3"
+	{
+		"type"		"S"
+		"text"		"{LIGHTGREEN}本服务器由{GREEN}音理酱{LIGHTGREEN}提供 {GREEN}树树子{LIGHTGREEN}提供维护和技术支持"
+	}
+	"4"
+	{
+		"type"		"S"
+		"text"		"{LIGHTGREEN}新手建议走{GREEN}一号位{LIGHTGREEN}带起节奏 但要注意别被√√√X哦"
+	}
+	"5"
+	{
+		"type"		"S"
+		"text"		"{LIGHTGREEN}为了游戏体验 本组药役建议游戏时间在{GREEN}114514{LIGHTGREEN}小时且充值{GREEN}1919810{LIGHTGREEN}元以上"
+	}
+	"6"
+	{
+		"type"		"S"
+		"text"		"{LIGHTGREEN}血量低于{GREEN}40{LIGHTGREEN}时可以直接自杀了 因为队友没有你都能过关哦"
+	}
+	"7"
+	{
+		"type"		"S"
+		"text"		"{LIGHTGREEN}本服默认{GREEN}2023-01-01{LIGHTGREEN}刷特插件\n提供{GREEN}77{LIGHTGREEN}、{GREEN}1128{LIGHTGREEN}等刷特插件选择"
+	}
+	"8"
+	{
+		"type"		"S"
+		"text"		"{LIGHTGREEN}如果觉得{GREEN}hunter{LIGHTGREEN}太弱\n可以在{GREEN}难度调整{LIGHTGREEN}中选择更强的{GREEN}hunter{LIGHTGREEN}"
+	}
+	"9"
+	{
+		"type"		"S"
+		"text"		"{LIGHTGREEN}近战没必要留给一号位 一号位就是要{GREEN}喷子{LIGHTGREEN}配{GREEN}马格南"
+	}
+	"10"
+	{
+		"type"		"S"
+		"text"		"{LIGHTGREEN}听说{GREEN}!vote{LIGHTGREEN}里面有很多有趣的东西 为什么不试试呢"
+	}
+	"11"
+	{
+		"type"		"S"
+		"text"		"{LIGHTGREEN}本服包含{GREEN}高难度硬核药役{LIGHTGREEN}模式 听说腐竹自己打都坐牢"
+	}
+	"12"
+	{
+		"type"		"S"
+		"text"		"{LIGHTGREEN}本服包含{GREEN}fakelag{LIGHTGREEN}插件\n输入{GREEN}!myfl{LIGHTGREEN}[空格]{GREEN}数字{LIGHTGREEN}即可给自己加ping值"
+	}
+}

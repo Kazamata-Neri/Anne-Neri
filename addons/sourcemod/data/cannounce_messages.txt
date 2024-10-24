@@ -1,0 +1,13 @@
+"CustomJoinMessages"
+{
+	"STEAM_1:1:549271790"
+	{
+		"playerwasnamed"		"我是派蒙啊"
+		"message"		"进不去，怎么想都进不去吧！"
+	}
+	"STEAM_1:0:561259974"
+	{
+		"playerwasnamed"		"Kazamata Neri"
+		"message"		"真是的欧尼酱，要是没有我你该怎么办啊"
+	}
+}

@@ -1,0 +1,101 @@
+"MatchModes"
+{
+	"版本选择"
+	{
+		"AnneHappy"
+		{
+			"name" "自动2023-01-01药役模式(难度中等，默认配置)"
+		}
+		"AnneHappy-77"
+		{
+			"name" "音理2021-07-07药役模式(难度中等)"
+		}
+		"AnneHappy-1128"
+		{
+			"name" "音理2021-11-28药役模式(难度中等偏上)"
+		}
+		"AnneHappy-4k"
+		{
+			"name" "全控2023-01-01药役模式(难度中等偏上)"
+		}
+		"AnneHappy-ast-fake"
+		{
+			"name" "伪ast药役模式(难度中等)"
+		}
+		"AnneHappy-ast-true"
+		{
+			"name" "真ast药役模式(难度中等)"
+		}
+		"AnneHappy-hard"
+		{
+			"name" "硬核药役(难度较高，建议组队)"
+		}
+		"AnneHappy-sanfang"
+		{
+			"name" "简单药役(难度简单，三方可用)"
+		}
+	}
+	"训练模式"
+	{
+		"Alone"
+		{
+			"name" "单人装逼模式(无舌)"
+		}
+		"Alone-xtdh"
+		{
+			"name" "单人装逼模式(有舌)"
+		}
+		"AnneHanpy"
+		{
+			"name" "1 vs hunter模式"
+		}
+		"AnneHanpy-floor"
+		{
+			"name" "1 vs 天花板hunter模式(仅限训练，ai行为别太当真)"
+		}
+		"AnneHanpy-nextmod1v1"
+		{
+			"name" "1 vs 天花板hunter模式(nextmod1v1版)"
+		}
+		"AnneHaopy"
+		{
+			"name" "1 vs jockey模式"
+		}
+		"HunterParty"
+		{
+			"name" "4人抱hunter练枪模式(hunter party)"
+		}
+	}
+	"娱乐模式"
+	{
+		"realism"
+		{
+			"name" "写实模式"
+		}
+		"Mutation4"
+		{
+			"name" "休闲绝境12特(三方用)"
+		}
+		"coop-10t5s"
+		{
+			"name" "战役10特5秒(大枪版)"
+		}
+		"coop-10t5s-hard"
+		{
+			"name" "战役10特5秒(小枪版)"
+		}
+		"AnneHappy-fast"
+		{
+			"name" "特感速递(塔塔开)"
+		}
+		"AnneHappy-two"
+		{
+			"name" "双人成行"
+		}
+		"AnneHappy-charger"
+		{
+			"name" "斗牛勇士"
+		}
+	}
+	
+}

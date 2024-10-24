@@ -1,0 +1,57 @@
+"Phrases"
+{
+	"PluginEncounteredError"
+	{
+		"en"		"[Family Share Manager] Plugin has encountered a critial error with the list file."
+	}
+
+	"InvalidSyntaxSteam"
+	{
+		"en"		"[Family Share Manager] Invalid Syntax: sm_removefromlist <steam id>"
+	}
+
+	"PlayerSteamID"
+	{
+		"en"		"%s - %s"
+	}
+
+	"FoundSteamRemoving"
+	{
+		"en"		"[Family Share Manager] Found Steam ID: %s, removing from list..."
+	}
+
+	"NotFoundSteamID"
+	{
+		"en"		"[Family Share Manager] Steam ID: %s not found, no action taken."
+	}
+
+	"DisplayingPlayersMenu"
+	{
+		"en"		"[Family Share Manager] Displaying players menu..."
+	}
+
+	"InvalidNotaSteam"
+	{
+		"en"		"[Family Share Manager] Invalid Input - Not a Steam 2 ID. (STEAM_0:X:XXXX)"
+	}
+
+	"SuccessFullyAdded"
+	{
+		"en"		"[Family Share Manager] Successfully added %s to the list."
+	}
+
+	"SuccessFullyAddedPlayer"
+	{
+		"en"		"[Family Share Manager] Successfully added %s (%N) to the list."
+	}
+
+	"RebuildingWhitelist"
+	{
+		"en"		"[Family Share Manager] Rebuilding whitelist..."
+	}
+
+	"RebuildComplete"
+	{
+		"en"		"[Family Share Manager] Rebuild complete!"
+	}
+}

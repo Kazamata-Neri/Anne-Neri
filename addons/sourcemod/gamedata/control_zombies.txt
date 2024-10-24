@@ -1,0 +1,277 @@
+"Games"
+{
+	"#default"
+	{
+		"Offsets"
+		{
+			"OS"
+			{
+				"linux"		"1"
+				"windows"	"0"
+			}
+		}
+	}
+
+	"left4dead2"
+	{
+		"Functions"
+		{
+			"DD::CTerrorPlayer::OnEnterGhostState"
+			{
+				"signature"	"CTerrorPlayer::OnEnterGhostState"
+				"callconv"	"thiscall"
+				"return"	"void"
+				"this"		"entity"
+			}
+
+			"DD::CTerrorPlayer::MaterializeFromGhost"
+			{
+				"signature"		"CTerrorPlayer::MaterializeFromGhost"
+				"callconv"		"thiscall"
+				"return"		"void"
+				"this"			"entity"
+			}
+
+			"DD::CTerrorPlayer::PlayerZombieAbortControl"
+			{
+				"signature"		"CTerrorPlayer::PlayerZombieAbortControl"
+				"callconv"		"thiscall"
+				"return"		"void"
+				"this"			"entity"
+			}
+		}
+
+		"Addresses"
+		{
+			"CTerrorPlayer::RoundRespawn"
+			{
+				"signature"	"CTerrorPlayer::RoundRespawn"
+			}
+
+			"ForEachTerrorPlayer<SpawnablePZScan>"
+			{
+				"signature"	"ForEachTerrorPlayer<SpawnablePZScan>"
+			}
+		}
+
+		"Offsets"
+		{
+			/* CBaseEntity::IsInStasis(CBaseEntity *__hidden this) */
+			"CBaseEntity::IsInStasis"
+			{
+				"linux"		"40"
+				"windows"	"39"
+			}
+
+			"RoundRespawn_Offset"
+			{
+				"linux"		"25" // 0x19
+				"windows"	"15" // 0xF
+			}
+
+			"RoundRespawn_Byte" // JNZ => JNS
+			{
+				"linux"		"117" // 0x75
+				"windows"	"117" // 0x75
+			}
+
+			/**
+			 * CTerrorPlayer::OnIncapacitatedAsSurvivor(CTakeDamageInfo const&)
+			 *
+			 * How to find on Windows:
+			 * 1. Search for the "PlayerIncapacitated" string to locate the "CTerrorPlayer::OnIncapacitatedAsSurvivor" function.
+			 * 2. Look for the "weapon_pistol" string which should be a few lines above the "PainLevel:Critical" string.
+			 * 3. There are two function calls above the line where "weapon_pistol" is referenced.
+			 * 4. The variable that is being assigned a value below those two function calls has an offset.
+			 * 5. The offset will be the offset for the hidden melee weapon.
+			 *
+			 * How to find on Linux:
+			 * 1. Locate the function.
+			 * 2. Look for the "weapon_pistol" string which should be a few lines above the "PainLevel:Critical" string.
+			 * 3. There are two function calls above the line where "weapon_pistol" is referenced.
+			 * 4. The variable that is being assigned a value below those two function calls has an offset.
+			 * 5. Multiply the offset by 4 to get the offset for the hidden melee weapon.
+			 **/
+			"CTerrorPlayer::OnIncapacitatedAsSurvivor::m_hHiddenWeapon"
+			{
+				"linux"		"16288"
+				"windows"	"16308"
+			}
+
+			/**
+			* CTerrorPlayer::OnRevived(CTerrorPlayer *__hidden this)
+			*
+			* 如何寻找:
+			* 1. 搜索 "RevivedByFrien" 定位到 "CTerrorPlayer::OnRevived" 函数内部
+			* 2. 下面有个函数设置的最后一个参数是0.0, 往下数2行就到v24或v31, Linux和Windows都是一样的位置
+			**/
+			"CTerrorPlayer::OnRevived::m_preHangingHealth" //或参考left4dhooks "m_preIncapacitatedHealth"
+			{
+				"linux"		"14824"	//v25 - v24
+				"windows"	"14844"	//v32 - v31
+			}
+
+			"CTerrorPlayer::OnRevived::m_preHangingHealthBuffer" //或参考left4dhooks "m_preIncapacitatedHealthBuffer"
+			{
+				"linux"		"14828"	//v24
+				"windows"	"14848"	//v31
+			}
+		}
+
+		"Signatures" //大部分windows签名来自https://github.com/Psykotikism/L4D1-2_Signatures
+		{
+			/* CTerrorPlayer::OnRevived(CTerrorPlayer *__hidden this) */
+			"CTerrorPlayer::OnRevived"
+			{
+				"library"	"server"
+				"linux"		"@_ZN13CTerrorPlayer9OnRevivedEv"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\x53\x56\x8B\x2A\x8B\x2A\x8B\x90\x2A\x2A\x2A\x2A\x57\xFF\x2A\x84\x2A\x0F\x84\x2A\x2A\x2A\x2A\x8B\x2A\xE8"
+				/* ? ? ? ? ? ? 53 56 8B ? 8B ? 8B 90 ? ? ? ? 57 FF ? 84 ? 0F 84 ? ? ? ? 8B ? E8 */
+			}
+
+			/* Tank::LeaveStasis(void) */
+			"Tank::LeaveStasis"
+			{
+				"library"	"server"
+				"linux"		"@_ZN4Tank11LeaveStasisEv"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x8D\xB7\x2A\x2A\x2A\x2A\x74\x2A\x8B\x86\x2A\x2A\x2A\x2A\x8B\x90\x2A\x2A\x2A\x2A\x8D\x8E\x2A\x2A\x2A\x2A\x56\xFF\x2A\xC6\x2A\x2A\x8B\x2A\x8B\x90\x2A\x2A\x2A\x2A\x8B"
+				/* ? ? ? ? ? ? ? ? ? ? ? 8D B7 ? ? ? ? 74 ? 8B 86 ? ? ? ? 8B 90 ? ? ? ? 8D 8E ? ? ? ? 56 FF ? C6 ? ? 8B ? 8B 90 ? ? ? ? 8B */
+			}
+
+			/* CCSPlayer::State_Transition(CSPlayerState) */
+			"CCSPlayer::State_Transition"
+			{
+				"library"	"server"
+				"linux"		"@_ZN9CCSPlayer16State_TransitionE13CSPlayerState"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\x8B\x86\x2A\x2A\x2A\x2A\x57\x8B\x2A\x2A\x85\x2A\x74\x2A\x83"
+				/* ? ? ? ? ? ? 8B 86 ? ? ? ? 57 8B ? ? 85 ? 74 ? 83 */
+			}
+
+			/* CTerrorPlayer::OnEnterGhostState(void) */
+			"CTerrorPlayer::OnEnterGhostState"
+			{
+				"library"	"server"
+				"linux"		"@_ZN13CTerrorPlayer17OnEnterGhostStateEv"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\x53\x56\x8B\x2A\x8B\x86\x2A\x2A\x2A\x2A\x8B\x2A\x2A\x8D\x8E\x2A\x2A\x2A\x2A\x57"
+				/* ? ? ? ? ? ? 53 56 8B ? 8B 86 ? ? ? ? 8B ? ? 8D 8E ? ? ? ? 57 */
+			}
+
+			/* CTerrorPlayer::MaterializeFromGhost(void) */
+			"CTerrorPlayer::MaterializeFromGhost"
+			{
+				"library"	"server"
+				"linux"		"@_ZN13CTerrorPlayer20MaterializeFromGhostEv"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\xFF\x2A\x50\xE8\x2A\x2A\x2A\x2A\x83\x2A\x2A\x50\x8B\x2A\x8B\x90\x2A\x2A\x2A\x2A\x8B\x2A\xFF\x2A\x50\x68\x2A\x2A\x2A\x2A\xE8"
+				/* ? ? ? ? ? ? ? ? ? ? ? FF ? 50 E8 ? ? ? ? 83 ? ? 50 8B ? 8B 90 ? ? ? ? 8B ? FF ? 50 68 ? ? ? ? E8 */
+			}
+
+			/* CTerrorPlayer::PlayerZombieAbortControl(void) */
+			"CTerrorPlayer::PlayerZombieAbortControl"
+			{
+				"library"	"server"
+				"linux"		"@_ZN13CTerrorPlayer24PlayerZombieAbortControlEv"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\x56\x8B\x2A\xE8\x2A\x2A\x2A\x2A\x83\x2A\x2A\x0F\x85\x2A\x2A\x2A\x2A\x8B\x2A\x8B\x90\x2A\x2A\x2A\x2A\x8B\x2A\xFF\x2A\x84\x2A\x0F\x84\x2A\x2A\x2A\x2A\xE8"
+				/* ? ? ? ? ? ? 56 8B ? E8 ? ? ? ? 83 ? ? 0F 85 ? ? ? ? 8B ? 8B 90 ? ? ? ? 8B ? FF ? 84 ? 0F 84 ? ? ? ? E8 */
+			}
+
+			/* ForEachTerrorPlayer<SpawnablePZScan>(SpawnablePZScan &) */
+			"ForEachTerrorPlayer<SpawnablePZScan>"
+			{
+				"library"	"server"
+				"linux"		"@_Z19ForEachTerrorPlayerI15SpawnablePZScanEbRT_"
+				"windows"	"\xE8\x2A\x2A\x2A\x2A\x8B\x75\x80"
+				/* E8 ? ? ? ? 8B 75 80 */
+			}
+
+			/* CTerrorPlayer::SetClass(ZombieClassType) */
+			"CTerrorPlayer::SetClass"
+			{
+				"library"	"server"
+				"linux"		"@_ZN13CTerrorPlayer8SetClassE15ZombieClassType"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x83\x2A\x2A\x0F\x85\x2A\x2A\x2A\x2A\xA1\x2A\x2A\x2A\x2A\x40"
+				/* ? ? ? ? ? ? E8 ? ? ? ? 83 ? ? 0F 85 ? ? ? ? A1 ? ? ? ? 40 */
+			}
+
+			/* CBaseAbility::CreateForPlayer(CTerrorPlayer *) */
+			"CBaseAbility::CreateForPlayer"
+			{
+				"library"	"server"
+				"linux"		"@_ZN12CBaseAbility15CreateForPlayerEP13CTerrorPlayer"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\x56\x8B\x2A\x2A\x85\x2A\x0F\x84\x2A\x2A\x2A\x2A\x8B\x2A\xE8\x2A\x2A\x2A\x2A\x83"
+				/* ? ? ? ? ? ? 56 8B ? ? 85 ? 0F 84 ? ? ? ? 8B ? E8 ? ? ? ? 83 */
+			}
+
+			/* CTerrorPlayer::CleanupPlayerState(void) */
+			"CTerrorPlayer::CleanupPlayerState"
+			{
+				"library"	"server"
+				"linux"		"@_ZN13CTerrorPlayer18CleanupPlayerStateEv"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\x83\x2A\x2A\x83\x2A\x2A\x55\x8B\x2A\x2A\x89\x2A\x2A\x2A\x8B\x2A\x0F\x2A\x2A\x83\x2A\x2A\x56\x8B\x2A\xC7"
+				/* ? ? ? ? ? ? 83 ? ? 83 ? ? 55 8B ? ? 89 ? ? ? 8B ? 0F ? ? 83 ? ? 56 8B ? C7 */
+			}
+
+			/* CTerrorPlayer::TakeOverZombieBot(CTerrorPlayer*) */
+			"CTerrorPlayer::TakeOverZombieBot"
+			{
+				"library"	"server"
+				"linux"		"@_ZN13CTerrorPlayer17TakeOverZombieBotEPS_"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\xA1\x2A\x2A\x2A\x2A\x33\x2A\x89\x2A\x2A\x53\x8B\x2A\x2A\x80\xBB"
+				/* ? ? ? ? ? ? ? ? ? A1 ? ? ? ? 33 ? 89 ? ? 53 8B ? ? 80 BB */
+			}
+
+			/* CTerrorPlayer::ReplaceWithBot(CTerrorPlayer *__hidden this, bool) */
+			"CTerrorPlayer::ReplaceWithBot"
+			{
+				"library"	"server"
+				"linux"		"@_ZN13CTerrorPlayer14ReplaceWithBotEb"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\xA1\x2A\x2A\x2A\x2A\x33\x2A\x89\x2A\x2A\x56\x8B\x2A\x8B\x2A\x8B\x90\x2A\x2A\x2A\x2A\xFF\x2A\x84\x2A\x74\x2A\x80"
+				/* ? ? ? ? ? ? ? ? ? A1 ? ? ? ? 33 ? 89 ? ? 56 8B ? 8B ? 8B 90 ? ? ? ? FF ? 84 ? 74 ? 80 */
+			}
+
+			/* CTerrorPlayer::SetPreSpawnClass(ZombieClassType) */
+			"CTerrorPlayer::SetPreSpawnClass"
+			{
+				"library"	"server"
+				"linux"		"@_ZN13CTerrorPlayer16SetPreSpawnClassE15ZombieClassType"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x8B\x2A\x39\xBE\xB8"
+				/* ? ? ? ? ? ? ? ? 8B ? 39 BE B8 */
+			}
+
+			/* CTerrorPlayer::RoundRespawn(void) */
+			"CTerrorPlayer::RoundRespawn"
+			{
+				"library"	"server"
+				"linux"		"@_ZN13CTerrorPlayer12RoundRespawnEv"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\xE8\x2A\x2A\x2A\x2A\x84\x2A\x75\x2A\x8B\x2A\xE8\x2A\x2A\x2A\x2A\xC6\x86"
+				/* ? ? ? ? ? ? ? ? E8 ? ? ? ? 84 ? 75 ? 8B ? E8 ? ? ? ? C6 86 */
+			}
+
+			/* SurvivorBot::SetHumanSpectator(SurvivorBot *__hidden this, CTerrorPlayer *) */
+			"SurvivorBot::SetHumanSpectator"
+			{
+				"library"	"server"
+				"linux"		"@_ZN11SurvivorBot17SetHumanSpectatorEP13CTerrorPlayer"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\x83\xBE\x2A\x2A\x2A\x2A\x2A\x7E\x2A\x32\x2A\x5E\x5D\xC2\x2A\x2A\x8B\x0D"
+                /* ? ? ? ? ? ? 83 BE ? ? ? ? ? 7E ? 32 ? 5E 5D C2 ? ? 8B 0D */
+			}
+
+			/* CTerrorPlayer::TakeOverBot(CTerrorPlayer *__hidden this, bool) */
+			"CTerrorPlayer::TakeOverBot"
+			{
+				"library"  "server"
+				"linux"    "@_ZN13CTerrorPlayer11TakeOverBotEb"
+				"windows"  "\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\xA1\x2A\x2A\x2A\x2A\x33\x2A\x89\x2A\x2A\x53\x56\x8D"
+				/* ? ? ? ? ? ? ? ? ? A1 ? ? ? ? 33 ? 89 ? ? 53 56 8D */
+			}
+
+			/* CTerrorGameRules::"CTerrorGameRules::HasPlayerControlledZombies"() */
+			"CTerrorGameRules::HasPlayerControlledZombies"
+			{
+				"library"	"server"
+				"linux"		"@_ZN16CTerrorGameRules26HasPlayerControlledZombiesEv"
+				"windows"	"\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x2A\x74\x2A\xB8\x2A\x2A\x2A\x2A\xEB\x2A\xA1\x2A\x2A\x2A\x2A\x8B\x2A\x2A\x85\x2A\x75\x2A\xB8\x2A\x2A\x2A\x2A\x8B\x0D\x2A\x2A\x2A\x2A\x8B\x2A\x50\x8B\x2A\x2A\xFF\x2A\x85\x2A\x74\x2A\x6A\x2A\x68\x2A\x2A\x2A\x2A\x8B\x2A\xE8\x2A\x2A\x2A\x2A\x85\x2A\x7E"
+				/* ? ? ? ? ? ? ? ? ? ? 74 ? B8 ? ? ? ? EB ? A1 ? ? ? ? 8B ? ? 85 ? 75 ? B8 ? ? ? ? 8B 0D ? ? ? ? 8B ? 50 8B ? ? FF ? 85 ? 74 ? 6A ? 68 ? ? ? ? 8B ? E8 ? ? ? ? 85 ? 7E */
+			}
+		}
+    }
+}
