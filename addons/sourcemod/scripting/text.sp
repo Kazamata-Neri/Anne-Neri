@@ -4,7 +4,7 @@
 #include <sdkhooks>
 #include <left4dhooks>
 //#include <smlib>
-#define PLUGIN_VERSION	"New"			//版本
+#define PLUGIN_VERSION	"2021-11-28"			//版本
 new Handle: g_hCvarInfectedTime = INVALID_HANDLE;
 new Handle: g_hCvarInfectedLimit = INVALID_HANDLE;
 new Handle: g_hCvarTankBhop = INVALID_HANDLE;
@@ -59,7 +59,7 @@ public Action:ZiSha(client, args)
 
 public Incap_Event(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    new Incap = GetClientOfUserId(GetEventInt(event, "userid"));
+	new Incap = GetClientOfUserId(GetEventInt(event, "userid"));
 	if(bool:GetConVarBool(hCvarCoop))
 	{
 		ForcePlayerSuicide(Incap);
@@ -90,38 +90,53 @@ public CvarTankBhop( Handle:cvar, const String:oldValue[], const String:newValue
 public CvarWeapon( Handle:cvar, const String:oldValue[], const String:newValue[] ) 
 {
 	Weapon = GetConVarInt(g_hCvarWeapon);
-	if (Weapon>0)
+	if (Weapon == 0)
 	{
-		ServerCommand("exec vote/weapon/zonedmod.cfg");
+		ServerCommand("exec vote/weapon/Annehappy.cfg");
 	}
-	else
+	else if(Weapon == 1)
 	{
-		ServerCommand("exec vote/weapon/AnneHappy.cfg");
+		ServerCommand("exec vote/weapon/zonemod.cfg");
+	}
+	else if(Weapon == 2)
+	{
+		ServerCommand("exec vote/weapon/Neri.cfg");
 	}
 }
 public Action:InfectedStatus(int Client, args)
 { 
 	//FormatTime(sBuffer, sizeof(sBuffer), "%Y/%m/%d");
-	if(TankBhop > 0)
+	if(IsValidPlayer(Client, false))
 	{
-		if( Weapon > 0)
+		if(TankBhop > 0)
 		{
-			PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+			if(Weapon == 0)
+			{
+				PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+			}
+			else if(Weapon == 1)
+			{
+				PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+			}
+			else if(Weapon == 2)
+			{
+				PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Neri\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+			}
 		}
 		else
 		{
-			PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
-		}
-	}
-	else
-	{
-		if( Weapon > 0)
-		{
-			PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
-		}
-		else
-		{
-			PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+			if(Weapon == 0)
+			{
+				PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+			}
+			else if(Weapon == 1)
+			{
+				PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+			}
+			else if(Weapon == 2)
+			{
+				PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Neri\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+			}
 		}
 	}
 	if(GetConVarInt(FindConVar("ReturnBlood"))>0)
@@ -132,27 +147,36 @@ public Action:InfectedStatus(int Client, args)
 }
 public event_RoundStart(Handle:event, const String:name[], bool:dontBroadcast)
 {
+	ServerCommand("sm plugins load_unlock");
 	//FormatTime(sBuffer, sizeof(sBuffer), "%Y/%m/%d");
 	if(TankBhop > 0)
 	{
-		if( Weapon > 0)
+		if(Weapon == 0)
+		{
+			PrintToChatAll("\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+		}
+		else if(Weapon == 1)
 		{
 			PrintToChatAll("\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 		}
-		else
+		else if(Weapon == 2)
 		{
-			PrintToChatAll("\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+			PrintToChatAll("\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Neri\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 		}
 	}
 	else
 	{
-		if( Weapon > 0)
+		if(Weapon == 0)
+		{
+			PrintToChatAll("\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+		}
+		else if(Weapon == 1)
 		{
 			PrintToChatAll("\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 		}
-		else
+		else if(Weapon == 2)
 		{
-			PrintToChatAll("\x03Tank连跳\x05[\x04关闭\x05]\x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+			PrintToChatAll("\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Neri\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 		}
 	}
 	if(GetConVarInt(FindConVar("ReturnBlood"))>0)
@@ -173,24 +197,32 @@ public OnClientPutInServer(int Client)
 		}
 		if(TankBhop > 0)
 		{
-			if( Weapon > 0)
+			if(Weapon == 0)
+			{
+				PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+			}
+			else if(Weapon == 1)
 			{
 				PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
-			else
+			else if(Weapon == 2)
 			{
-				PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+				PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Neri\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
 		}
 		else
 		{
-			if( Weapon > 0)
+			if(Weapon == 0)
+			{
+				PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+			}
+			else if(Weapon == 1)
 			{
 				PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
-			else
+			else if(Weapon == 2)
 			{
-				PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05]\x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+				PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Neri\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
 		}
 		if(GetConVarInt(FindConVar("ReturnBlood"))>0)
@@ -222,12 +254,16 @@ stock bool:IsValidPlayer(Client, bool:AllowBot = true, bool:AllowDeath = true)
 ReloadPlugins()
 {
 	ServerCommand("sm plugins load_unlock");
-	ServerCommand("sm plugins reload optional/AnneHappy/infected_control.smx");
-	ServerCommand("sm plugins reload optional/AnneHappy/hunters.smx");
-	ServerCommand("sm plugins reload optional/AnneHappy/Alone.smx");
+	ServerCommand("sm plugins reload optional/infected_control_77.smx");
+	ServerCommand("sm plugins reload optional/infected_control_1128.smx");
+	ServerCommand("sm plugins reload optional/hunters.smx");
+	ServerCommand("sm plugins reload optional/Jockeys.smx");
+	ServerCommand("sm plugins reload optional/Allcharger.smx");
+	ServerCommand("sm plugins reload optional/Alone.smx");
+	ServerCommand("sm plugins reload optional/Alone_sea.smx");
 	ServerCommand("sm plugins load_lock");
 	ServerCommand("sm_startspawn");
-	
+
 }
 
 bool:IsTeamImmobilised() {
@@ -252,8 +288,8 @@ stock bool:Survivor(i)
 }
 stock bool:Incapacitated(client)
 {
-    new bool:bIsIncapped = false;
-	if ( Survivor(client) ) {
+	new bool:bIsIncapped = false;
+	if (Survivor(client)) {
 		if (GetEntProp(client, Prop_Send, "m_isIncapacitated") > 0) bIsIncapped = true;
 		if (!IsPlayerAlive(client)) bIsIncapped = true;
 	}
