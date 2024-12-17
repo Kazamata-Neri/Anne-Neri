@@ -316,6 +316,14 @@
 		{
 			"message" "枪械不抖动"
 		}
+		"exec vote/mod/mod_on.cfg"
+		{
+			"message" "开启Mod"
+		}
+		"exec vote/mod/mod_off.cfg"
+		{
+			"message" "关闭Mod"
+		}
 	}
 	"人数调整"
 	{
