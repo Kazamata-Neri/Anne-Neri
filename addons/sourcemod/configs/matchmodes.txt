@@ -68,9 +68,9 @@
 	}
 	"娱乐模式"
 	{
-		"realism"
+		"coop"
 		{
-			"name" "写实模式"
+			"name" "战役模式"
 		}
 		"Mutation4"
 		{

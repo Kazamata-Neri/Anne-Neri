@@ -25,15 +25,15 @@
 	}
 	"刷新时间"
 	{
-		"exec vote/realism_eazy.cfg"
+		"exec vote/coop_eazy.cfg"
 		{
 			"message" "特感正常刷新(默认)"
 		}
-		"exec vote/realism_middle.cfg"
+		"exec vote/coop_middle.cfg"
 		{
 			"message" "特感加速刷新"
 		}
-		"exec vote/realism_hard.cfg"
+		"exec vote/coop_hard.cfg"
 		{
 			"message" "特感极速刷新"
 		}
@@ -106,9 +106,9 @@
 	}
 	"娱乐模式"
 	{
-		"sm_fm realism"
+		"sm_fm coop"
 		{
-			"message" "写实模式"
+			"message" "战役模式"
 		}
 		"sm_fm Mutation4"
 		{

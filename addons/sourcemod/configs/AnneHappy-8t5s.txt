@@ -186,9 +186,9 @@
 	}
 	"娱乐模式"
 	{
-		"sm_fm realism"
+		"sm_fm coop"
 		{
-			"message" "写实模式"
+			"message" "战役模式"
 		}
 		"sm_fm Mutation4"
 		{
