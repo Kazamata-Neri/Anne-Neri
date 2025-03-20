@@ -133,15 +133,15 @@
 		}
 		"sm_fm Mutation4"
 		{
-			"message" "休闲绝境12特(三方用)"
+			"message" "绝境12特(三方用)"
 		}
 		"sm_fm coop-10t5s"
 		{
-			"message" "战役10特5秒(大枪版)"
+			"message" "战役10特5秒(三方摸鱼版)"
 		}
 		"sm_fm coop-10t5s-hard"
 		{
-			"message" "战役10特5秒(小枪版)"
+			"message" "战役10特5秒(常规混野版)"
 		}
 		"sm_fm AnneHappy-fast"
 		{
