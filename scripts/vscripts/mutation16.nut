@@ -18,7 +18,7 @@ DirectorOptions <-
 	SmokerLimit = 	0
 	JockeyLimit = 	0
 	ChargerLimit = 	0
-	SpitterLimit = 	1
+	SpitterLimit = 	0
 	BoomerLimit = 	0
 
 	//控制型特感总数
@@ -34,7 +34,7 @@ MapData <-{
 	g_nSMOKER = 0
 	g_nJOCKEY = 0
 	g_nCHARGER = 0
-	g_nSPITTER = 1
+	g_nSPITTER = 0
 	g_nBOOMER = 0
 	g_nSRI = 5
 	last_set = 0
@@ -51,7 +51,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "5":
@@ -60,7 +60,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "6":
@@ -69,7 +69,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "7":
@@ -78,7 +78,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "8":
@@ -87,7 +87,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "9":
@@ -96,7 +96,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "10":
@@ -105,7 +105,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "11":
@@ -114,7 +114,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "12":
@@ -123,7 +123,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "13":
@@ -132,7 +132,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "14":
@@ -141,7 +141,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "15":
@@ -150,7 +150,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "16":
@@ -159,7 +159,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "17":
@@ -168,7 +168,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "18":
@@ -177,7 +177,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "19":
@@ -186,7 +186,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "20":
@@ -195,7 +195,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "21":
@@ -204,7 +204,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "22":
@@ -213,7 +213,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "23":
@@ -222,7 +222,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "24":
@@ -231,7 +231,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "25":
@@ -240,7 +240,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "26":
@@ -249,7 +249,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "27":
@@ -258,7 +258,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	case "28":
@@ -267,7 +267,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	default:
@@ -276,7 +276,7 @@ function Update()
 		MapData.g_nSMOKER = 0
 		MapData.g_nJOCKEY = 0
 		MapData.g_nCHARGER = 0
-		MapData.g_nSPITTER = 1
+		MapData.g_nSPITTER = 0
 		MapData.g_nBOOMER = 0
 		break;
 	}
