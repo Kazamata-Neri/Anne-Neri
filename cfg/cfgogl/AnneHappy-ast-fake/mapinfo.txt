@@ -347,11 +347,6 @@
 			"too late"
 			{
 				"min"		"49"
-				"max"		"56"
-			}
-			"Not To Far"
-			{
-				"min"		"75"
 				"max"		"85"
 			}
 		}

@@ -291,6 +291,18 @@
 		{
 			"message" "It's been a long day  without you my friend.(默认)"
 		}
+		"exec vote/ast/true_ast_ng_bhop_on.cfg"
+		{
+			"message" "开启内鬼(有连跳)"
+		}
+		"exec vote/ast/true_ast_ng_on.cfg"
+		{
+			"message" "开启内鬼(无连跳)"
+		}
+		"exec vote/ast/true_ast_ng_off.cfg"
+		{
+			"message" "关闭内鬼(默认)"
+		}
 		"exec vote/melee/magic_melee_on.cfg"
 		{
 			"message" "魔法可比枪好用多了"
