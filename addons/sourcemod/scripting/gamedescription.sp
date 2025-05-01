@@ -21,5 +21,5 @@ public void OnPluginStart()
 
 public void OnGameFrame()
 {
-	SteamWorks_SetGameDescription("黑黑の挨撅小屋");
+	SteamWorks_SetGameDescription("音理の快乐小屋");
 }
