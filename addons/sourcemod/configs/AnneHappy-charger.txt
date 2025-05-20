@@ -276,13 +276,13 @@
 		{
 			"message" "枪械不抖动"
 		}
-		"exec vote/shove/shove_cd_1.cfg"
+		"exec vote/inf_hp/inf_hp_on.cfg"
 		{
-			"message" "有限推"
+			"message" "开启特感血条"
 		}
-		"exec vote/shove/shove_cd_0.cfg"
+		"exec vote/inf_hp/shove_cd_0.cfg"
 		{
-			"message" "无限推"
+			"message" "关闭特感血条"
 		}
 		"exec vote/ammo/infinite_off.cfg"
 		{

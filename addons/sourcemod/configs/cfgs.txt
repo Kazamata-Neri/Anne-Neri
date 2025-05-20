@@ -344,6 +344,14 @@
 		{
 			"message" "枪械不抖动"
 		}
+		"exec vote/inf_hp/inf_hp_on.cfg"
+		{
+			"message" "开启特感血条"
+		}
+		"exec vote/inf_hp/shove_cd_0.cfg"
+		{
+			"message" "关闭特感血条"
+		}
 	}
 	"人数调整"
 	{
