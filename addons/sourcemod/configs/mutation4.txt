@@ -217,6 +217,18 @@
 		{
 			"message" "枪械不抖动(默认)"
 		}
+		"exec vote/returnblood/returnblood_coop.cfg"
+		{
+			"message" "开启回血(越狱首选)"
+		}
+		"exec vote/returnblood/returnblood_off.cfg"
+		{
+			"message" "关闭回血(默认)"
+		}
+		"exec vote/ammo/Null.cfg"
+		{
+			"message" "强迫症的福音"
+		}
 		"exec vote/weapon/Neri.cfg"
 		{
 			"message" "NeriHappy枪械"
