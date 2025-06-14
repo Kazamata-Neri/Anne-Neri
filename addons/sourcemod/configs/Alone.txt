@@ -368,7 +368,7 @@
 		{
 			"message" "开启特感血条"
 		}
-		"exec vote/inf_hp/shove_cd_0.cfg"
+		"exec vote/inf_hp/inf_hp_off.cfg"
 		{
 			"message" "关闭特感血条"
 		}
