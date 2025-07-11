@@ -15,8 +15,8 @@ DirectorOptions <-
 
 	//每只特感最大数量限制
 	HunterLimit = 	3
-	SmokerLimit = 	1
-	JockeyLimit = 	2
+	SmokerLimit = 	2
+	JockeyLimit = 	3
 	ChargerLimit = 	2
 	SpitterLimit = 	1
 	BoomerLimit = 	1
@@ -34,8 +34,8 @@ DirectorOptions <-
 MapData <-{
 	g_nSI = 7
 	g_nHUNTER = 3
-	g_nSMOKER = 1
-	g_nJOCKEY = 2
+	g_nSMOKER = 2
+	g_nJOCKEY = 3
 	g_nCHARGER = 2
 	g_nSPITTER = 1
 	g_nBOOMER = 1
@@ -68,18 +68,18 @@ function Update()
 		break;
 	case "6":
 		MapData.g_nSI = 6
-		MapData.g_nHUNTER = 3
+		MapData.g_nHUNTER = 2
 		MapData.g_nSMOKER = 1
 		MapData.g_nJOCKEY = 2
-		MapData.g_nCHARGER = 1
+		MapData.g_nCHARGER = 2
 		MapData.g_nSPITTER = 1
 		MapData.g_nBOOMER = 1
 		break;
 	case "7":
 		MapData.g_nSI = 7
 		MapData.g_nHUNTER = 3
-		MapData.g_nSMOKER = 1
-		MapData.g_nJOCKEY = 2
+		MapData.g_nSMOKER = 2
+		MapData.g_nJOCKEY = 3
 		MapData.g_nCHARGER = 2
 		MapData.g_nSPITTER = 1
 		MapData.g_nBOOMER = 1
@@ -87,8 +87,8 @@ function Update()
 	default:
 		MapData.g_nSI = 7
 		MapData.g_nHUNTER = 3
-		MapData.g_nSMOKER = 1
-		MapData.g_nJOCKEY = 2
+		MapData.g_nSMOKER = 2
+		MapData.g_nJOCKEY = 3
 		MapData.g_nCHARGER = 2
 		MapData.g_nSPITTER = 1
 		MapData.g_nBOOMER = 1
