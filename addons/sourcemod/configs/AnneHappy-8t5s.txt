@@ -12,7 +12,7 @@
 		}
 		"exec vote/coop/coop8.cfg"
 		{
-			"message" "8特模式"
+			"message" "8特模式(默认)"
 		}
 		"exec vote/coop/coop9.cfg"
 		{
@@ -20,7 +20,7 @@
 		}
 		"exec vote/coop/coop10.cfg"
 		{
-			"message" "10特模式(默认)"
+			"message" "10特模式"
 		}
 		"exec vote/coop/coop11.cfg"
 		{
@@ -194,13 +194,13 @@
 		{
 			"message" "绝境12特(三方用)"
 		}
-		"sm_fm coop-10t5s"
+		"sm_fm coop-8t5s"
 		{
-			"message" "战役10特5秒(三方摸鱼版)"
+			"message" "战役8特5秒(三方摸鱼版)"
 		}
-		"sm_fm coop-10t5s-hard"
+		"sm_fm coop-8t5s-hard"
 		{
-			"message" "战役10特5秒(常规混野版)"
+			"message" "战役8特5秒(常规混野版)"
 		}
 		"sm_fm AnneHappy-fast"
 		{
@@ -244,29 +244,33 @@
 	}
 	"人数调整"
 	{
-		"exec vote/players/coop-10t5s_4.cfg"
+		"exec vote/players/coop-8t5s_4.cfg"
 		{
 			"message" "4人运动"
 		}
-		"exec vote/players/coop-10t5s_5.cfg"
+		"exec vote/players/coop-8t5s_5.cfg"
 		{
 			"message" "5人运动"
 		}
-		"exec vote/players/coop-10t5s_6.cfg"
+		"exec vote/players/coop-8t5s_6.cfg"
 		{
 			"message" "6人运动"
 		}
-		"exec vote/players/coop-10t5s_7.cfg"
+		"exec vote/players/coop-8t5s_7.cfg"
 		{
 			"message" "7人运动"
 		}
-		"exec vote/players/coop-10t5s_8.cfg"
+		"exec vote/players/coop-8t5s_8.cfg"
 		{
 			"message" "8人运动"
 		}
 	}
 	"没活硬整"
 	{
+		"exec vote/tank/fast_rock_100.cfg"
+		{
+			"message" "秒砖概率100%(谨慎选择)"
+		}
 		"exec vote/tank/fast_rock_25.cfg"
 		{
 			"message" "秒砖概率25%(蜀黍的最爱)"
@@ -291,10 +295,6 @@
 		{
 			"message" "枪可比魔法好用多了(默认)"
 		}	
-		"exec vote/ammo/Null.cfg"
-		{
-			"message" "强迫症的福音"
-		}
 		"exec vote/bot_lead_on.cfg"
 		{
 			"message" "人机带路"
