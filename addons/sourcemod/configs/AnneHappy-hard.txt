@@ -259,19 +259,19 @@
 		}
 		"exec vote/ht/ht_fly_normal.cfg"
 		{
-			"message" "平飞のhunter(默认)"
+			"message" "平飞のhunter"
 		}
 		"exec vote/ht/ht_fly_low.cfg"
 		{
-			"message" "低飞のhunter"
+			"message" "低飞のhunter(默认)"
 		}
 		"exec vote/ht/hunter_normal.cfg"
 		{
-			"message" "普通のhunter(默认)"
+			"message" "普通のhunter"
 		}
 		"exec vote/ht/hunter_crazy.cfg"
 		{
-			"message" "灵活のhunter"
+			"message" "灵活のhunter(默认)"
 		}
 		"exec vote/ht/hunter_hentai.cfg"
 		{
@@ -279,11 +279,11 @@
 		}
 		"exec vote/jk/jockey_normal.cfg"
 		{
-			"message" "普通のjockey(默认)"
+			"message" "普通のjockey"
 		}
 		"exec vote/jk/jockey_crazy.cfg"
 		{
-			"message" "凶狠のjockey"
+			"message" "凶狠のjockey(默认)"
 		}
 		"exec vote/si_level_normal.cfg"
 		{
