@@ -11,16 +11,16 @@ DirectorOptions <-
 	cm_SpecialRespawnInterval 		= 5
 
 	//特感总数
-	cm_BaseSpecialLimit = 10
-	cm_MaxSpecials = 10
+	cm_BaseSpecialLimit = 8
+	cm_MaxSpecials = 8
 
 	//每只特感最大数量限制
 	HunterLimit = 	3
 	SmokerLimit = 	3
 	JockeyLimit = 	3
 	ChargerLimit = 	3
-	SpitterLimit = 	3
-	BoomerLimit = 	3
+	SpitterLimit = 	2
+	BoomerLimit = 	2
 
 	//控制型特感总数
 	DominatorLimit = 28
@@ -33,13 +33,13 @@ DirectorOptions <-
 }
 
 MapData <-{
-	g_nSI = 10
+	g_nSI = 8
 	g_nHUNTER = 3
 	g_nSMOKER = 3
 	g_nJOCKEY = 3
 	g_nCHARGER = 3
-	g_nSPITTER = 3
-	g_nBOOMER = 3
+	g_nSPITTER = 2
+	g_nBOOMER = 2
 	g_nSRI = 5
 	last_set = 0
 }
