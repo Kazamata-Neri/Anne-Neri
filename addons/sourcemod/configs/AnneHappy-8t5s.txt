@@ -122,7 +122,7 @@
 	{
 		"sm_fm AnneHappy"
 		{
-			"message" "音理2023-01-01药役模式(难度中等，默认配置)"
+			"message" "音理2025-07-21药役模式(难度中等，默认配置)"
 		}
 		"sm_fm AnneHappy-77"
 		{
@@ -134,7 +134,7 @@
 		}
 		"sm_fm AnneHappy-4k"
 		{
-			"message" "全控2023-01-01药役模式(难度中等偏上)"
+			"message" "全控2025-07-21药役模式(难度中等偏上)"
 		}
 		"sm_fm AnneHappy-ast-fake"
 		{
