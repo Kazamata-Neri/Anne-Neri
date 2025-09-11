@@ -2,7 +2,12 @@ ServerName
 {
 	"38533"
 	{
-		"baseName"	"星空列车与白的旅行#5"
+		"baseName"	"星空列车与白的旅行#1"
+	}
+
+	"38534"
+	{
+		"baseName"	"星空列车与白的旅行#2"
 	}
 
 	"27015"
@@ -12,12 +17,12 @@ ServerName
 	
 	"27016"
 	{
-		"baseName"	"腾讯云轻量测试2服"
+		"baseName"	"已经没什么好怕的了"
 	}
 	
 	"27017"
 	{
-		"baseName"	"腾讯云轻量测试3服"
+		"baseName"	"AnneHappy"
 	}
 	
 	"27018"
@@ -45,8 +50,4 @@ ServerName
 		"baseName"	"腾讯云轻量测试9服"
 	}
 
-	"38534"
-	{
-		"baseName"	"星空列车与白的旅行#6"
-	}
 }

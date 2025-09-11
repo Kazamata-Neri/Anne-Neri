@@ -228,4 +228,320 @@
 	{
 		"chi"		"2: 灯塔"
 	}
+	"l4d2_stadium1_apartment"
+	{
+		"chi"		"The Apartment"
+	}
+	"l4d2_stadium2_riverwalk"
+	{
+		"chi"		"The Riverwalk"
+	}
+	"l4d2_stadium3_city1"
+	{
+		"chi"		"The Law"
+	}
+	"l4d2_stadium4_city2"
+	{
+		"chi"		"The City"
+	}
+	"l4d2_stadium5_stadium"
+	{
+		"chi"		"The Stadium"
+	}
+	"l4d2_sv_stadium2_riverwalk"
+	{
+		"chi"		"The Riverwalk Survival"
+	}
+	"l4d2_sv_stadium3_city1"
+	{
+		"chi"		"The Law Survival"
+	}
+	"l4d2_sv_stadium4_city2"
+	{
+		"chi"		"The City Survival"
+	}
+	"dkr_m1_motel"
+	{
+		"chi"		"The Motel"
+	}
+	"dkr_m2_carnival"
+	{
+		"chi"		"The Carnival"
+	}
+	"dkr_m3_tunneloflove"
+	{
+		"chi"		"The Tunnel of Love"
+	}
+	"dkr_m4_ferris"
+	{
+		"chi"		"The Ferris Wheel"
+	}
+	"dkr_m5_stadium"
+	{
+		"chi"		"The Stadium"
+	}
+	"PR1_Waterfront_F"
+	{
+		"chi"		"Waterfront"
+	}
+	"PR2_Park_F"
+	{
+		"chi"		"park"
+	}
+	"PR3_Highway_F"
+	{
+		"chi"		"Highway"
+	}
+	"PR4_Quarter_F"
+	{
+		"chi"		"Quarter"
+	}
+	"PR5_Bridge_F"
+	{
+		"chi"		"bridge"
+	}
+	"wfp1_track"
+	{
+		"chi"		"Trainyard"
+	}
+	"wfp2_horn"
+	{
+		"chi"		"Cave"
+	}
+	"wfp3_mill"
+	{
+		"chi"		"Industrial Warehouses"
+	}
+	"wfp4_commstation"
+	{
+		"chi"		"Radio Stations"
+	}
+	"l4d2_city17_01"
+	{
+		"chi"		"1: Tunnels"
+	}
+	"l4d2_city17_02"
+	{
+		"chi"		"2: To the surface"
+	}
+	"l4d2_city17_03"
+	{
+		"chi"		"3: Streets"
+	}
+	"l4d2_city17_04"
+	{
+		"chi"		"4: Hospital"
+	}
+	"l4d2_city17_05"
+	{
+		"chi"		"5: Trainstation"
+	}
+	"cdta_01detour"
+	{
+		"chi"		"DTA1 Detour"
+	}
+	"cdta_02road"
+	{
+		"chi"		"DTA2 Hill"
+	}
+	"cdta_03warehouse"
+	{
+		"chi"		"DTA3 Warehouse"
+	}
+	"cdta_04onarail"
+	{
+		"chi"		"DTA4 On A Rail"
+	}
+	"cdta_05finalroad"
+	{
+		"chi"		"DTA5 Final Road"
+	}
+	"l4d2_diescraper1_apartment_361"
+	{
+		"chi"		"Apartment complex"
+	}
+	"l4d2_diescraper2_streets_361"
+	{
+		"chi"		"Downtown military outpost"
+	}
+	"l4d2_diescraper3_mid_361"
+	{
+		"chi"		"The Skymall"
+	}
+	"l4d2_diescraper4_top_361"
+	{
+		"chi"		"The top suites"
+	}
+	"nanningcity_departure_m1"
+	{
+		"chi"		"1: 启程/Departure"
+	}
+	"nanningcity_chaoyang_square_m2"
+	{
+		"chi"		"2: 广场/Square"
+	}
+	"nanningcity_main_street_m3"
+	{
+		"chi"		"3: 主街/Main street"
+	}
+	"nanningcity_main_road_m4"
+	{
+		"chi"		"4: 主干道/Main road"
+	}
+	"nanningcity_workzone_m5"
+	{
+		"chi"		"5: 施工区/Work zone"
+	}
+	"nanningcity_bridge_m6"
+	{
+		"chi"		"6: 大桥/Bridge"
+	}
+	"l4d_dbd2dc_anna_is_gone"
+	{
+		"chi"		"Anna is gone"
+	}
+	"l4d_dbd2dc_the_mall"
+	{
+		"chi"		"The mall"
+	}
+	"l4d_dbd2dc_clean_up"
+	{
+		"chi"		"Clean up"
+	}
+	"l4d_dbd2dc_undead_center"
+	{
+		"chi"		"Undead center"
+	}
+	"l4d_dbd2dc_new_dawn"
+	{
+		"chi"		"New dawn"
+	}
+	"l4d_deadline02"
+	{
+		"chi"		"Dead Line Survival"
+	}
+	"l4d_dbd2_undead_center"
+	{
+		"chi"		"Dead Line Scavenge"
+	}
+	"cwm1_intro"
+	{
+		"chi"		"The Riverbed"
+	}
+	"cwm2_warehouse"
+	{
+		"chi"		"The Town"
+	}
+	"cwm3_drain"
+	{
+		"chi"		"The Sewers"
+	}
+	"cwm4_building"
+	{
+		"chi"		"The Office Building"
+	}
+	"bdp_bunker01"
+	{
+		"chi"		"1: Deeper Levels"
+	}
+	"bdp_bunker02"
+	{
+		"chi"		"2: Old Tunnels"
+	}
+	"bdp_bunker03"
+	{
+		"chi"		"3: Freight Elevator"
+	}
+	"bdp_bunker04"
+	{
+		"chi"		"4: The Road"
+	}
+	"bdp_bunker05a"
+	{
+		"chi"		"5: The Forest Garage"
+	}
+	"l4d_tbm_1"
+	{
+		"chi"		"1: The Cottage"
+	}
+	"l4d_tbm_2"
+	{
+		"chi"		"2: Acid House Party"
+	}
+	"l4d_tbm_3"
+	{
+		"chi"		"3: 'Keep Off The Moors'"
+	}
+	"l4d_tbm_4"
+	{
+		"chi"		"4: The Old Stag"
+	}
+	"l4d_tbm_5"
+	{
+		"chi"		"5: Arthur's Supplies"
+	}
+	"dxyl1"
+	{
+		"chi"		"Tunnel"
+	}
+	"dxyl2"
+	{
+		"chi"		"Prison"
+	}
+	"dxyl3"
+	{
+		"chi"		"Reactor"
+	}
+	"dxyl4_f"
+	{
+		"chi"		"Metro"
+	}
+	"cave7m1"
+	{
+		"chi"		"cave7maps1"
+	}
+	"cave7m2"
+	{
+		"chi"		"cave7maps2"
+	}
+	"cave7m3"
+	{
+		"chi"		"cave7maps3"
+	}
+	"cave7m4"
+	{
+		"chi"		"cave7maps4"
+	}
+	"cave7m5"
+	{
+		"chi"		"cave7maps5"
+	}
+	"cave7m6"
+	{
+		"chi"		"cave7maps6"
+	}
+	"cave7m7"
+	{
+		"chi"		"cave7maps7"
+	}
+	"cave7m9"
+	{
+		"chi"		"cave7maps9"
+	}
+	"cave7m10"
+	{
+		"chi"		"cave7maps10"
+	}
+	"cave7m11"
+	{
+		"chi"		"cave7maps11"
+	}
+	"cave7m12"
+	{
+		"chi"		"cave7maps12"
+	}
+	"<map name>"
+	{
+		"chi"		"<map title>"
+	}
 }

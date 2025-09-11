@@ -56,4 +56,60 @@
 	{
 		"chi"		"临死一搏"
 	}
+	"suicideblitz2"
+	{
+		"chi"		"Suicide Blitz 2"
+	}
+	"DarkCarnivalRemix"
+	{
+		"chi"		"Dark Carnival Remix"
+	}
+	"ParishOverGrowth"
+	{
+		"chi"		"Parish: OverGrowth"
+	}
+	"WhiteForest"
+	{
+		"chi"		"White Forest"
+	}
+	"City17l4d2"
+	{
+		"chi"		"City 17 v3.2"
+	}
+	"detourahead"
+	{
+		"chi"		"$DetourAhead_Title"
+	}
+	"Diescraper362"
+	{
+		"chi"		"Diescraper Redux 3.62"
+	}
+	"GuangXiNanning"
+	{
+		"chi"		"广西-南宁 V1.15.1"
+	}
+	"dbd2dc"
+	{
+		"chi"		"Dead Before Dawn DC"
+	}
+	"CarriedOff"
+	{
+		"chi"		"Carried Off"
+	}
+	"BuriedDeep"
+	{
+		"chi"		"Buried Deep"
+	}
+	"TheBloodyMoors"
+	{
+		"chi"		"The Bloody Moors"
+	}
+	"dxyl"
+	{
+		"chi"		"地心引力TheGravitation"
+	}
+	"CaveTour7"
+	{
+		"chi"		"Cave7"
+	}
 }

@@ -228,4 +228,320 @@
 	{
 		"en"		"2: Lighthouse Finale"
 	}
+	"l4d2_stadium1_apartment"
+	{
+		"en"		"The Apartment"
+	}
+	"l4d2_stadium2_riverwalk"
+	{
+		"en"		"The Riverwalk"
+	}
+	"l4d2_stadium3_city1"
+	{
+		"en"		"The Law"
+	}
+	"l4d2_stadium4_city2"
+	{
+		"en"		"The City"
+	}
+	"l4d2_stadium5_stadium"
+	{
+		"en"		"The Stadium"
+	}
+	"l4d2_sv_stadium2_riverwalk"
+	{
+		"en"		"The Riverwalk Survival"
+	}
+	"l4d2_sv_stadium3_city1"
+	{
+		"en"		"The Law Survival"
+	}
+	"l4d2_sv_stadium4_city2"
+	{
+		"en"		"The City Survival"
+	}
+	"dkr_m1_motel"
+	{
+		"en"		"The Motel"
+	}
+	"dkr_m2_carnival"
+	{
+		"en"		"The Carnival"
+	}
+	"dkr_m3_tunneloflove"
+	{
+		"en"		"The Tunnel of Love"
+	}
+	"dkr_m4_ferris"
+	{
+		"en"		"The Ferris Wheel"
+	}
+	"dkr_m5_stadium"
+	{
+		"en"		"The Stadium"
+	}
+	"PR1_Waterfront_F"
+	{
+		"en"		"Waterfront"
+	}
+	"PR2_Park_F"
+	{
+		"en"		"park"
+	}
+	"PR3_Highway_F"
+	{
+		"en"		"Highway"
+	}
+	"PR4_Quarter_F"
+	{
+		"en"		"Quarter"
+	}
+	"PR5_Bridge_F"
+	{
+		"en"		"bridge"
+	}
+	"wfp1_track"
+	{
+		"en"		"Trainyard"
+	}
+	"wfp2_horn"
+	{
+		"en"		"Cave"
+	}
+	"wfp3_mill"
+	{
+		"en"		"Industrial Warehouses"
+	}
+	"wfp4_commstation"
+	{
+		"en"		"Radio Stations"
+	}
+	"l4d2_city17_01"
+	{
+		"en"		"1: Tunnels"
+	}
+	"l4d2_city17_02"
+	{
+		"en"		"2: To the surface"
+	}
+	"l4d2_city17_03"
+	{
+		"en"		"3: Streets"
+	}
+	"l4d2_city17_04"
+	{
+		"en"		"4: Hospital"
+	}
+	"l4d2_city17_05"
+	{
+		"en"		"5: Trainstation"
+	}
+	"cdta_01detour"
+	{
+		"en"		"DTA1 Detour"
+	}
+	"cdta_02road"
+	{
+		"en"		"DTA2 Hill"
+	}
+	"cdta_03warehouse"
+	{
+		"en"		"DTA3 Warehouse"
+	}
+	"cdta_04onarail"
+	{
+		"en"		"DTA4 On A Rail"
+	}
+	"cdta_05finalroad"
+	{
+		"en"		"DTA5 Final Road"
+	}
+	"l4d2_diescraper1_apartment_361"
+	{
+		"en"		"Apartment complex"
+	}
+	"l4d2_diescraper2_streets_361"
+	{
+		"en"		"Downtown military outpost"
+	}
+	"l4d2_diescraper3_mid_361"
+	{
+		"en"		"The Skymall"
+	}
+	"l4d2_diescraper4_top_361"
+	{
+		"en"		"The top suites"
+	}
+	"nanningcity_departure_m1"
+	{
+		"en"		"1: 启程/Departure"
+	}
+	"nanningcity_chaoyang_square_m2"
+	{
+		"en"		"2: 广场/Square"
+	}
+	"nanningcity_main_street_m3"
+	{
+		"en"		"3: 主街/Main street"
+	}
+	"nanningcity_main_road_m4"
+	{
+		"en"		"4: 主干道/Main road"
+	}
+	"nanningcity_workzone_m5"
+	{
+		"en"		"5: 施工区/Work zone"
+	}
+	"nanningcity_bridge_m6"
+	{
+		"en"		"6: 大桥/Bridge"
+	}
+	"l4d_dbd2dc_anna_is_gone"
+	{
+		"en"		"Anna is gone"
+	}
+	"l4d_dbd2dc_the_mall"
+	{
+		"en"		"The mall"
+	}
+	"l4d_dbd2dc_clean_up"
+	{
+		"en"		"Clean up"
+	}
+	"l4d_dbd2dc_undead_center"
+	{
+		"en"		"Undead center"
+	}
+	"l4d_dbd2dc_new_dawn"
+	{
+		"en"		"New dawn"
+	}
+	"l4d_deadline02"
+	{
+		"en"		"Dead Line Survival"
+	}
+	"l4d_dbd2_undead_center"
+	{
+		"en"		"Dead Line Scavenge"
+	}
+	"cwm1_intro"
+	{
+		"en"		"The Riverbed"
+	}
+	"cwm2_warehouse"
+	{
+		"en"		"The Town"
+	}
+	"cwm3_drain"
+	{
+		"en"		"The Sewers"
+	}
+	"cwm4_building"
+	{
+		"en"		"The Office Building"
+	}
+	"bdp_bunker01"
+	{
+		"en"		"1: Deeper Levels"
+	}
+	"bdp_bunker02"
+	{
+		"en"		"2: Old Tunnels"
+	}
+	"bdp_bunker03"
+	{
+		"en"		"3: Freight Elevator"
+	}
+	"bdp_bunker04"
+	{
+		"en"		"4: The Road"
+	}
+	"bdp_bunker05a"
+	{
+		"en"		"5: The Forest Garage"
+	}
+	"l4d_tbm_1"
+	{
+		"en"		"1: The Cottage"
+	}
+	"l4d_tbm_2"
+	{
+		"en"		"2: Acid House Party"
+	}
+	"l4d_tbm_3"
+	{
+		"en"		"3: 'Keep Off The Moors'"
+	}
+	"l4d_tbm_4"
+	{
+		"en"		"4: The Old Stag"
+	}
+	"l4d_tbm_5"
+	{
+		"en"		"5: Arthur's Supplies"
+	}
+	"dxyl1"
+	{
+		"en"		"Tunnel"
+	}
+	"dxyl2"
+	{
+		"en"		"Prison"
+	}
+	"dxyl3"
+	{
+		"en"		"Reactor"
+	}
+	"dxyl4_f"
+	{
+		"en"		"Metro"
+	}
+	"cave7m1"
+	{
+		"en"		"cave7maps1"
+	}
+	"cave7m2"
+	{
+		"en"		"cave7maps2"
+	}
+	"cave7m3"
+	{
+		"en"		"cave7maps3"
+	}
+	"cave7m4"
+	{
+		"en"		"cave7maps4"
+	}
+	"cave7m5"
+	{
+		"en"		"cave7maps5"
+	}
+	"cave7m6"
+	{
+		"en"		"cave7maps6"
+	}
+	"cave7m7"
+	{
+		"en"		"cave7maps7"
+	}
+	"cave7m9"
+	{
+		"en"		"cave7maps9"
+	}
+	"cave7m10"
+	{
+		"en"		"cave7maps10"
+	}
+	"cave7m11"
+	{
+		"en"		"cave7maps11"
+	}
+	"cave7m12"
+	{
+		"en"		"cave7maps12"
+	}
+	"<map name>"
+	{
+		"en"		"<map title>"
+	}
 }
