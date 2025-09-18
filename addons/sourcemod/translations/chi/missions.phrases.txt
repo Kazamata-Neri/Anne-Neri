@@ -112,4 +112,16 @@
 	{
 		"chi"		"Cave7"
 	}
+	"contraz"
+	{
+		"chi"		"ContraZ"
+	}
+	"darkblood2"
+	{
+		"chi"		"Dark Blood 2"
+	}
+	"eye"
+	{
+		"chi"		"异度神召"
+	}
 }

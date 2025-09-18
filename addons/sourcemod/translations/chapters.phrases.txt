@@ -544,4 +544,92 @@
 	{
 		"en"		"<map title>"
 	}
+	"contra3d01"
+	{
+		"en"		"ContraZ01"
+	}
+	"contra3d02"
+	{
+		"en"		"ContraZ02"
+	}
+	"contra3d03"
+	{
+		"en"		"ContraZ03"
+	}
+	"contra3d04"
+	{
+		"en"		"ContraZ04"
+	}
+	"contra3d05"
+	{
+		"en"		"ContraZ05"
+	}
+	"contra3d06"
+	{
+		"en"		"ContraZ06"
+	}
+	"l4d2_darkblood01_tanker"
+	{
+		"en"		"Tanker Ship"
+	}
+	"l4d2_darkblood02_engine"
+	{
+		"en"		"Tanker Engine"
+	}
+	"l4d2_darkblood03_platform"
+	{
+		"en"		"Platform"
+	}
+	"l4d2_darkblood04_extraction"
+	{
+		"en"		"Extraction"
+	}
+	"dworld01_point"
+	{
+		"en"		"Ⅰ.谜题"
+	}
+	"dworld02_falling"
+	{
+		"en"		"Ⅱ.遗迹"
+	}
+	"dworld03_noctis"
+	{
+		"en"		"Ⅲ.山峦"
+	}
+	"dworld04_monolith"
+	{
+		"en"		"Ⅳ.要塞"
+	}
+	"dworld05_forgotten"
+	{
+		"en"		"Ⅴ.沉睡"
+	}
+	"dworld06_sheep"
+	{
+		"en"		"Ⅵ.梦境"
+	}
+	"dworld07_new_eden"
+	{
+		"en"		"Ⅶ.新界"
+	}
+	"dworld08_tuto"
+	{
+		"en"		"Ⅷ.探求"
+	}
+	"dworld09_tuto2"
+	{
+		"en"		"Ⅸ.死刑"
+	}
+	"dworld10_ancient"
+	{
+		"en"		"Ⅹ.古殿"
+	}
+	"dworld11_purge"
+	{
+		"en"		"Ⅺ.花园"
+	}
+	"dworld12_warp"
+	{
+		"en"		"Ⅻ.终章"
+	}
 }

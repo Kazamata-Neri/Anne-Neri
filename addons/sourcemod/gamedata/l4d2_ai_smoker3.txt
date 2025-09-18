@@ -1,0 +1,92 @@
+"Games"
+{
+	"left4dead2"
+	{
+		"ActionConstructors"
+		{
+			"SmokerMoveToAttackPosition::SmokerMoveToAttackPosition"
+			{
+				"signature"		"SmokerMoveToAttackPosition::SmokerMoveToAttackPosition"
+
+				// v41 = (SmokerMoveToAttackPosition *)operator new(0x4830u);
+				// SmokerMoveToAttackPosition::SmokerMoveToAttackPosition(v41, v40);
+				// size: 0x4830 for 18480
+				"size"			"0x4830"
+				
+				"params"
+				{
+					"target"
+					{
+						/*
+                        * basic - plain generic data 
+                        * float - floating point data
+                        * object - raw struct/class/array?
+                        */
+						"type"		"basic"
+						
+						/*
+                        * byval - pass by val
+                        * byref - pass by ref
+                        * dtor - object has destructor
+                        * ctor - object has constructor
+                        * assignop - object has assignment operator
+                        * unalign - object contains unaligned fields
+                        */
+						"flags"		"byref"
+						
+						/*
+                        * entity - entity index to CBaseEntity
+                        * vector - raw array to Vector struct
+                        */
+						"endocer"	"entity"
+					}
+				}
+			}
+		}
+		
+		"Signatures"
+		{
+			"SmokerAttack::SmokerAttack"
+			{
+				"library"	"server"
+				"linux"		"@_ZN12SmokerAttackC2Ev"
+				"windows"	""
+			}
+			
+			"SmokerMoveToAttackPosition::SmokerMoveToAttackPosition"
+			{
+				"library"	"server"
+				"linux"		"@_ZN26SmokerMoveToAttackPositionC2EP13CTerrorPlayer"
+				"windows"	"\x55\x8B\xEC\x53\x56\x8B\xF1\xC7\x46\x04\x2A\x2A\x2A\x2A\xC7\x46\x2C\x01\x00\x00\x00\x33\xDB\x33\xC0\x89\x46\x20\x33\xC9\x89\x4E\x24\x57\x33\xD2\x89\x56\x28\x33\xFF\x89\x5E\x0C\x89\x5E\x10\x89\x5E\x14\x89\x5E\x18\x89\x5E\x1C\x89\x5E\x08\x66\x89\x5E\x30\x89\x7E\x2C\xC7\x06\x2A\x2A\x2A\x2A\xC7\x46\x04\x2A\x2A\x2A\x2A\x8D\x4E\x38"
+			}
+			
+			"SmokerMoveToAttackPosition::Update"
+			{
+				"library"	"server"
+				"linux"		"@_ZN26SmokerMoveToAttackPosition6UpdateEP6Smokerf"
+				"windows"	"\x55\x8B\xEC\x83\xEC\x08\x53\x8B\x5D\x0C\x8B\x83\xD0\x30\x00\x00"
+			}
+		}
+		
+		"Offsets"
+		{
+			"SmokerBehavior::InitialContainedAction"
+			{
+				"windows"	"48"
+				"linux"		"49"
+			}
+			
+			"SmokerAttack::SmokerAttack"
+			{
+				"windows"	"56"
+				"linux"		"74"
+			}
+			
+			"SmokerMoveToAttackPosition::Update"
+			{
+				"windows"	"44"
+				"linux"		"45"
+			}
+		}
+	}
+}

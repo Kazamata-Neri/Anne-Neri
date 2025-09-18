@@ -112,4 +112,16 @@
 	{
 		"en"		"Cave7"
 	}
+	"contraz"
+	{
+		"en"		"ContraZ"
+	}
+	"darkblood2"
+	{
+		"en"		"Dark Blood 2"
+	}
+	"eye"
+	{
+		"en"		"异度神召"
+	}
 }

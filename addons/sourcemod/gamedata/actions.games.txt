@@ -1,0 +1,106 @@
+"Games"
+{
+	"tf"
+	{
+		"Offsets"
+		{
+			"MyNextBotPointer"
+			{
+				"windows" "75"
+				"windows64" "75"
+				
+				"linux" "76"
+				"linux64" "76"
+			}
+			
+			"GetEntity"
+			{
+				"windows" "46"
+				"windows64" "47"
+				
+				"linux" "47"
+				"linux64" "47"
+			}
+		}
+		
+		"Signatures"
+		{
+			"INextBot::Reset"
+			{
+				"library" 		"server"
+				"windows" 		"\xC7\x41\x14\x19\xFC\xFF\xFF"
+				"windows64" 	"\x40\x53\x48\x83\xEC\x20\x48\x8B\x59\x08\x33\xC0"
+				"linux" 		"@_ZN8INextBot5ResetEv"
+				"linux" 		"@_ZN8INextBot5ResetEv"
+			}
+		}
+	}
+	
+	"left4dead"
+	{
+		"Offsets"
+		{
+			"MyNextBotPointer"
+			{
+				"windows" "71"
+				"linux" "72"
+			}
+			
+			"GetEntity"
+			{
+				"windows" "39"
+				"linux" "40"
+			}
+			
+			"MySurvivorBotPointer"
+			{
+				"windows" "41"
+				"linux" "42"
+			}
+		}
+		
+		"Signatures"
+		{
+			"INextBot::Reset"
+			{
+				"library" "server"
+				"windows" 		"\xD9\x05\x2A\x2A\x2A\x2A\x56\x8B\xF1\x57\x8D\x7E\x38"
+				"linux" 		"@_ZN8INextBot5ResetEv"
+			}
+		}
+	}
+	
+	"left4dead2"
+	{
+		"Offsets"
+		{
+			"MyNextBotPointer"
+			{
+				"windows" "81"
+				"linux" "82"
+			}
+			
+			"GetEntity"
+			{
+				"windows" "44"
+				"linux" "45"
+			}
+			
+			"MySurvivorBotPointer"
+			{
+				"windows" "46"
+				"linux" "47"
+			}
+		}
+		
+		"Signatures"
+		{
+			"INextBot::Reset"
+			{
+				"library" "server"
+				"windows" "\xF3\x0F\x10\x05\x2A\x2A\x2A\x2A\x56\x8B\xF1\x57"
+				"linux" "@_ZN8INextBot5ResetEv"
+			}
+		}
+	}
+}
