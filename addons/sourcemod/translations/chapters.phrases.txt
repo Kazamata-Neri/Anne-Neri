@@ -632,4 +632,92 @@
 	{
 		"en"		"Ⅻ.终章"
 	}
+	"jiugongchang1"
+	{
+		"en"		"地下室"
+	}
+	"jiugongchang2"
+	{
+		"en"		"小吃街"
+	}
+	"jiugongchang3"
+	{
+		"en"		"工厂"
+	}
+	"jiugongchang4"
+	{
+		"en"		"办公楼"
+	}
+	"jiugongchang5"
+	{
+		"en"		"军库"
+	}
+	"jiugongchang6"
+	{
+		"en"		"鬼楼"
+	}
+	"jiugongchang7"
+	{
+		"en"		"机械怪"
+	}
+	"ins_m1_buhriz"
+	{
+		"en"		"buhriz"
+	}
+	"ins_m2_district1"
+	{
+		"en"		"district1"
+	}
+	"ins_m3_district2"
+	{
+		"en"		"district2"
+	}
+	"ins_m4_revolt"
+	{
+		"en"		"revolt"
+	}
+	"ins_m5_tell"
+	{
+		"en"		"tell"
+	}
+	"ins_m6_ministry"
+	{
+		"en"		"ministry"
+	}
+	"LS_FSL"
+	{
+		"en"		"灵城-丰收路"
+	}
+	"LS_FJL"
+	{
+		"en"		"灵城-丰江路"
+	}
+	"LS_ZSXML"
+	{
+		"en"		"灵城-中山路与第一幼儿园"
+	}
+	"LS_XML"
+	{
+		"en"		"灵城-西门街"
+	}
+	"LS_DXSC"
+	{
+		"en"		"灵城-地下商场"
+	}
+	"LS_RMGC"
+	{
+		"en"		"灵城-人民广场"
+	}
+	"LS_MEJAN"
+	{
+		"en"		"灵城-江岸"
+	}
+	"LS_LFSJQ"
+	{
+		"en"		"六峰山景区"
+	}
+	"LS_LFSJQ_CXF"
+	{
+		"en"		"六峰山-冲霄峰"
+	}
 }

@@ -124,4 +124,16 @@
 	{
 		"en"		"异度神召"
 	}
+	"jiugongchang"
+	{
+		"en"		"九死一生之小女孩的梦境v3.3"
+	}
+	"insurgency"
+	{
+		"en"		"Insurgency"
+	}
+	"LingShanbeta"
+	{
+		"en"		"广西_灵山V1.0"
+	}
 }

@@ -347,7 +347,7 @@
 			"too late"
 			{
 				"min"		"49"
-				"max"		"56"
+				"max"		"60"
 			}
 			"Not To Far"
 			{
@@ -367,7 +367,7 @@
 		{
 			"Sewer and parking lot"
 			{
-				"min"		"54"
+				"min"		"50"
 				"max"		"70"
 			}
 		}

@@ -5,6 +5,7 @@ DirectorOptions <-
 {
 	//藏特, 要改建议都改
 	ActiveChallenge 			= 1
+	//SpecialInfectedAssault 		= 1
 	cm_AggressiveSpecials 		= 1
 	cm_ShouldHurry 			= 1
 	ShouldAllowSpecialsWithTank 	= 1

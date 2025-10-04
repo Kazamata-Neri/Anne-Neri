@@ -124,4 +124,16 @@
 	{
 		"chi"		"异度神召"
 	}
+	"jiugongchang"
+	{
+		"chi"		"九死一生之小女孩的梦境v3.3"
+	}
+	"insurgency"
+	{
+		"chi"		"Insurgency"
+	}
+	"LingShanbeta"
+	{
+		"chi"		"广西_灵山V1.0"
+	}
 }
