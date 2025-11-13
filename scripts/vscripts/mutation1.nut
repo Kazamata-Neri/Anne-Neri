@@ -257,13 +257,13 @@ function Update()
 		MapData.g_nBOOMER = 5
 		break;
 	default:
-		MapData.g_nSI = 10
+		MapData.g_nSI = 8
 		MapData.g_nHUNTER = 3
 		MapData.g_nSMOKER = 3
 		MapData.g_nJOCKEY = 3
 		MapData.g_nCHARGER = 3
-		MapData.g_nSPITTER = 3
-		MapData.g_nBOOMER = 3
+		MapData.g_nSPITTER = 2
+		MapData.g_nBOOMER = 2
 		break;
 	}
 	switch (time) {
