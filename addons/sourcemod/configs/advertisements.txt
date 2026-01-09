@@ -33,7 +33,7 @@
 	"7"
 	{
 		"type"		"S"
-		"text"		"{LIGHTGREEN}本服默认{GREEN}2023-01-01{LIGHTGREEN}刷特插件\n提供{GREEN}77{LIGHTGREEN}、{GREEN}1128{LIGHTGREEN}等刷特插件选择"
+		"text"		"{LIGHTGREEN}本服默认{GREEN}2025-07-21{LIGHTGREEN}刷特插件\n提供{GREEN}77{LIGHTGREEN}、{GREEN}1128{LIGHTGREEN}等刷特插件选择"
 	}
 	"8"
 	{

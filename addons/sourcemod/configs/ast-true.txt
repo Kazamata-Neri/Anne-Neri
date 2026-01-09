@@ -18,6 +18,22 @@
 		{
 			"message" "4人运动(普通)"
 		}
+		"exec vote/ast/true_ast5.cfg"
+		{
+			"message" "5人运动(普通)"
+		}
+		"exec vote/ast/true_ast6.cfg"
+		{
+			"message" "6人运动(普通)"
+		}
+		"exec vote/ammo/Null.cfg"
+		{
+			"message" "强迫症的福音"
+		}
+		"exec vote/ast/true_ast1_hard.cfg"
+		{
+			"message" "1人运动(困难)"
+		}
 		"exec vote/ast/true_ast2_hard.cfg"
 		{
 			"message" "2人运动(困难)"
@@ -29,6 +45,18 @@
 		"exec vote/ast/true_ast4_hard.cfg"
 		{
 			"message" "4人运动(困难)"
+		}
+		"exec vote/ast/true_ast5_hard.cfg"
+		{
+			"message" "5人运动(困难)"
+		}
+		"exec vote/ast/true_ast6_hard.cfg"
+		{
+			"message" "6人运动(困难)"
+		}
+		"exec vote/ammo/Null.cfg"
+		{
+			"message" "强迫症的福音"
 		}
 		"exec vote/ast/true_ast1_impossible.cfg"
 		{
@@ -46,6 +74,22 @@
 		{
 			"message" "4人运动(专家)"
 		}
+		"exec vote/ast/true_ast5_impossible.cfg"
+		{
+			"message" "5人运动(专家)"
+		}
+		"exec vote/ast/true_ast6_impossible.cfg"
+		{
+			"message" "6人运动(专家)"
+		}
+		"exec vote/ammo/Null.cfg"
+		{
+			"message" "强迫症的福音"
+		}
+		"exec vote/ast/true_ast1_eazy.cfg"
+		{
+			"message" "1人运动(简单)"
+		}
 		"exec vote/ast/true_ast2_eazy.cfg"
 		{
 			"message" "2人运动(简单)"
@@ -57,6 +101,18 @@
 		"exec vote/ast/true_ast4_eazy.cfg"
 		{
 			"message" "4人运动(简单)"
+		}
+		"exec vote/ast/true_ast5_eazy.cfg"
+		{
+			"message" "5人运动(简单)"
+		}
+		"exec vote/ast/true_ast6_eazy.cfg"
+		{
+			"message" "6人运动(简单)"
+		}
+		"exec vote/ammo/Null.cfg"
+		{
+			"message" "强迫症的福音"
 		}
 	}
 	"版本选择"

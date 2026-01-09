@@ -6,11 +6,11 @@
 		{
 			"message" "4特模式"
 		}
-		"exec vote/AnneHappy5.cfg"
+		"exec vote/AnneHappy5_all.cfg"
 		{
 			"message" "5特模式"
 		}
-		"exec vote/AnneHappy6.cfg"
+		"exec vote/AnneHappy6_all.cfg"
 		{
 			"message" "6特模式"
 		}

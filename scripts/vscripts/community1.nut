@@ -85,6 +85,33 @@ function Update()
 		MapData.g_nSPITTER = 1
 		MapData.g_nBOOMER = 1
 		break;
+	case "8":
+		MapData.g_nSI = 8
+		MapData.g_nHUNTER = 3
+		MapData.g_nSMOKER = 3
+		MapData.g_nJOCKEY = 3
+		MapData.g_nCHARGER = 3
+		MapData.g_nSPITTER = 1
+		MapData.g_nBOOMER = 1
+		break;
+	case "9":
+		MapData.g_nSI = 9
+		MapData.g_nHUNTER = 3
+		MapData.g_nSMOKER = 3
+		MapData.g_nJOCKEY = 3
+		MapData.g_nCHARGER = 3
+		MapData.g_nSPITTER = 2
+		MapData.g_nBOOMER = 2
+		break;
+	case "10":
+		MapData.g_nSI = 10
+		MapData.g_nHUNTER = 4
+		MapData.g_nSMOKER = 3
+		MapData.g_nJOCKEY = 4
+		MapData.g_nCHARGER = 3
+		MapData.g_nSPITTER = 2
+		MapData.g_nBOOMER = 2
+		break;
 	default:
 		MapData.g_nSI = 7
 		MapData.g_nHUNTER = 3

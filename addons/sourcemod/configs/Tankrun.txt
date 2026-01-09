@@ -1,0 +1,227 @@
+"Cfgs"
+{
+	"秒数调整"
+	{
+		"exec vote/coop_0.cfg"
+		{
+			"message" "0秒"
+		}
+		"exec vote/coop_5.cfg"
+		{
+			"message" "5秒"
+		}
+		"exec vote/coop_10.cfg"
+		{
+			"message" "10秒(默认)"
+		}
+		"exec vote/coop_15.cfg"
+		{
+			"message" "15秒"
+		}
+		"exec vote/coop_20.cfg"
+		{
+			"message" "20秒"
+		}
+	}
+	"版本选择"
+	{
+		"sm_fm AnneHappy"
+		{
+			"message" "音理2025-07-21药役模式(难度中等，默认配置)"
+		}
+		"sm_fm AnneHappy-77"
+		{
+			"message" "音理2021-07-07药役模式(难度中等)"
+		}
+		"sm_fm AnneHappy-1128"
+		{
+			"message" "音理2021-11-28药役模式(难度中等偏上)"
+		}
+		"sm_fm AnneHappy-4k"
+		{
+			"message" "全控2025-07-21药役模式(难度中等偏上)"
+		}
+		"sm_fm AnneHappy-ast-fake"
+		{
+			"message" "伪ast药役模式(难度中等)"
+		}
+		"sm_fm AnneHappy-ast-true"
+		{
+			"message" "真ast药役模式(难度中等)"
+		}
+		"sm_fm AnneHappy-hard"
+		{
+			"message" "硬核药役(难度较高，建议组队)"
+		}
+		"sm_fm AnneHappy-sanfang"
+		{
+			"message" "简单药役(难度简单，三方可用)"
+		}
+	}
+	"训练模式"
+	{
+		"sm_fm Alone"
+		{
+			"message" "单人装逼模式(无舌)"
+		}
+		"sm_fm Alone-xtdh"
+		{
+			"message" "单人装逼模式(有舌)"
+		}
+		"sm_fm AnneHanpy"
+		{
+			"message" "1 vs hunter模式"
+		}
+		"sm_fm AnneHanpy-floor"
+		{
+			"message" "1 vs 天花板hunter模式(仅限训练，ai行为别太当真)"
+		}
+		"sm_fm AnneHanpy-nextmod1v1"
+		{
+			"message" "1 vs hunter模式(nextmod1v1版)"
+		}
+		"sm_fm AnneHaopy"
+		{
+			"message" "1 vs jockey模式"
+		}
+		"sm_fm HunterParty"
+		{
+			"message" "4人抱hunter练枪模式(hunter party)"
+		}
+	}
+	"娱乐模式"
+	{
+		"sm_fm coop"
+		{
+			"message" "战役模式"
+		}
+		"sm_fm Mutation4"
+		{
+			"message" "绝境12特(三方用)"
+		}
+		"sm_fm coop-8t5s"
+		{
+			"message" "战役8特5秒(三方摸鱼版)"
+		}
+		"sm_fm coop-8t5s-hard"
+		{
+			"message" "战役8特5秒(常规混野版)"
+		}
+		"sm_fm AnneHappy-fast"
+		{
+			"message" "特感速递(塔塔开)"
+		}
+		"sm_fm AnneHappy-two"
+		{
+			"message" "双人成行"
+		}
+		"sm_fm AnneHappy-charger"
+		{
+			"message" "斗牛勇士"
+		}
+	}
+	"难度调整"
+	{
+		"exec vote/mod/mod_on.cfg"
+		{
+			"message" "开启Mod"
+		}
+		"exec vote/mod/mod_off.cfg"
+		{
+			"message" "关闭Mod"
+		}
+		"exec vote/gunrecoil_off.cfg"
+		{
+			"message" "枪械抖动"
+		}
+		"exec vote/gunrecoil_on.cfg"
+		{
+			"message" "枪械不抖动(默认)"
+		}
+		"exec vote/weapon/Neri.cfg"
+		{
+			"message" "NeriHappy枪械"
+		}
+		"exec vote/weapon/Annehappy.cfg"
+		{
+			"message" "AnneHappy枪械(默认)"
+		}
+	}
+	"人数调整"
+	{
+		"exec vote/players/coop-8t5s_4.cfg"
+		{
+			"message" "4人运动"
+		}
+		"exec vote/players/coop-8t5s_5.cfg"
+		{
+			"message" "5人运动"
+		}
+		"exec vote/players/coop-8t5s_6.cfg"
+		{
+			"message" "6人运动"
+		}
+		"exec vote/players/coop-8t5s_7.cfg"
+		{
+			"message" "7人运动"
+		}
+		"exec vote/players/coop-8t5s_8.cfg"
+		{
+			"message" "8人运动"
+		}
+	}
+	"没活硬整"
+	{
+		"exec vote/tank/fast_rock_100.cfg"
+		{
+			"message" "秒砖概率100%(谨慎选择)"
+		}
+		"exec vote/tank/fast_rock_25.cfg"
+		{
+			"message" "秒砖概率25%(蜀黍的最爱)"
+		}
+		"exec vote/tank/fast_rock_0.cfg"
+		{
+			"message" "秒砖概率0%(默认)"
+		}
+		"exec vote/shove/shove_infected_on.cfg"
+		{
+			"message" "Man! What can I say? Manba out!"
+		}
+		"exec vote/shove/shove_infected_off.cfg"
+		{
+			"message" "It's been a long day  without you my friend.(默认)"
+		}
+		"exec vote/melee/magic_melee_on.cfg"
+		{
+			"message" "魔法可比枪好用多了"
+		}
+		"exec vote/melee/magic_melee_off.cfg"
+		{
+			"message" "枪可比魔法好用多了(默认)"
+		}	
+		"exec vote/bot_lead_on.cfg"
+		{
+			"message" "人机带路"
+		}
+		"exec vote/bot_lead_off.cfg"
+		{
+			"message" "人机跟随(默认)"
+		}
+	}
+	"服务器选项"
+	{
+		"sm_votekick"
+		{
+			"message" "投票踢出玩家"
+		}
+		"sm_restartmap"
+		{
+			"message" "重置当前地图"
+		}
+		"sm_restart"
+		{
+			"message" "服务器端重启"
+		}
+	}	
+}
