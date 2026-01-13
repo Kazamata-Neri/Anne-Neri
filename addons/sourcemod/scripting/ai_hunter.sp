@@ -41,7 +41,8 @@ ConVar
 	g_hHighPounceHeight,
 	g_hWallDetectDistance,
 	g_hAnglePounceCount,
-	g_hNoSightRevise;
+	g_hNoSightRevise,
+	g_hRandonLungeUp;
 
 // 其他 cvar
 ConVar
@@ -69,7 +70,7 @@ int
 
 public void OnPluginStart()
 {
-	g_hFastPounceDistance = CreateConVar("ai_hunter_fast_pounce_distance", "999999.0", "hunter 开始进行快速突袭的距离", CVAR_FLAG, true, 0.0, true, 1.0);
+	g_hFastPounceDistance = CreateConVar("ai_hunter_fast_pounce_distance", "99999.0", "hunter 开始进行快速突袭的距离", CVAR_FLAG, true, 0.0, true, 1.0);
 	g_hPounceVerticalAngle = CreateConVar("ai_hunter_vertical_angle", "0.0", "hunter 突袭的垂直角度不会超过这个大小", CVAR_FLAG, true, 0.0);
 	g_hPounceAngleMean = CreateConVar("ai_hunter_angle_mean", "20.0", "由随机数生成的基本角度", CVAR_FLAG, true, 0.0);
 	g_hPounceAngleStd = CreateConVar("ai_hunter_angle_std", "10.0", "与基本角度允许的偏差范围", CVAR_FLAG, true, 0.0);
@@ -82,6 +83,7 @@ public void OnPluginStart()
 	g_hWallDetectDistance = CreateConVar("ai_hunter_wall_detect_distance", "100", "hunter 视线前方有墙体，有多少概率飞向墙体", CVAR_FLAG, true, 0.0);
 	g_hAnglePounceCount = CreateConVar("ai_hunter_angle_diff", "3", "hunter 进行由随机数生成器生成角度侧飞时，左右飞的次数差不能大于这个值", CVAR_FLAG, true, 0.0);
 	g_hNoSightRevise = CreateConVar("ai_hunter_sight_revise", "0", "hunter 是否看着自己速度方向移动而不是看向生还者", CVAR_FLAG, true, 0.0, true, 1.0);
+	g_hRandonLungeUp = CreateConVar("ai_hunter_randon_lunge_up", "0", "是否随机高低飞", CVAR_FLAG, true, 0.0, true, 1.0);
 	// 挂钩 cvar 变动
 	//g_hMeleeFirst.AddChangeHook(meleeFirstRangeChangedHandler);
 	g_hNoSightPounceRange.AddChangeHook(noSightPounceRangeChangedHandler);
@@ -156,6 +158,7 @@ public Action OnPlayerRunCmd(int hunter, int& buttons, int& impulse, float vel[3
 		ability;
 	target = hunterCurrentTarget[hunter],
 	ability = GetEntPropEnt(hunter, Prop_Send, "m_customAbility");
+	float vec_speed[3] = {0.0}, cur_speed = 0.0;
 	if (!IsValidEntity(ability) || !IsValidEdict(ability) || !IsValidSurvivor(target)) { return Plugin_Continue; }
 	// 下一次可以使用能力的时间
 	static float
@@ -183,14 +186,25 @@ public Action OnPlayerRunCmd(int hunter, int& buttons, int& impulse, float vel[3
 	GetClientAbsOrigin(hunter, selfPos);
 	GetEntPropVector(target, Prop_Send, "m_vecOrigin", targetPos);
 	targetDistance = GetVectorDistance(selfPos, targetPos);
+	GetEntPropVector(hunter, Prop_Data, "m_vecVelocity", vec_speed);
+	cur_speed = SquareRoot(Pow(vec_speed[0], 2.0) + Pow(vec_speed[1], 2.0));
 
 	// 没有视野的情况, 如果开启了视角修正, 在地上的情况则看向自己移动方向
-	if (g_hNoSightRevise.BoolValue && !(GetEntityMoveType(hunter) & MOVETYPE_LADDER)) {
+	if (g_hNoSightRevise.BoolValue && !(GetEntityMoveType(hunter) & MOVETYPE_LADDER) && cur_speed > 50)
+	{
 		NormalizeVector(vecSpeed, vecSpeed);
 		static float vecAng[3];
 		GetVectorAngles(vecSpeed, vecAng);
 		TeleportEntity(hunter, NULL_VECTOR, vecAng, NULL_VECTOR);
 	}
+
+	// 随机高低飞
+	if(g_hRandonLungeUp.BoolValue)
+	{
+		int Magnification = GetRandomInt(4,12);
+		FindConVar("z_lunge_up").IntValue = 25 * Magnification;
+	}
+	
 	// 开启飞扑时背身
 	if (isLunging)
 	{
@@ -263,6 +277,7 @@ public Action OnPlayerRunCmd(int hunter, int& buttons, int& impulse, float vel[3
 	}
 	else if (canLungeTime[hunter] < gametime)
 	{
+		buttons |= IN_DUCK;
 		buttons |= IN_ATTACK;
 		hasQueuedLunge[hunter] = false;
 	}

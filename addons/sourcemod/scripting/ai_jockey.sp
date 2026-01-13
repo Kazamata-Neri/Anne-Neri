@@ -13,6 +13,14 @@
 #define SHOVE_INTERVAL 1.0
 #define DEBUG_ALL 0
 
+// Velocity
+enum VelocityOverride {
+	VelocityOvr_None = 0,
+	VelocityOvr_Velocity,
+	VelocityOvr_OnlyWhenNegative,
+	VelocityOvr_InvertReuseVelocity
+};
+
 enum AimType
 {
 	AimEye,
@@ -53,7 +61,7 @@ StringMap interControlMap = null;
 
 public void OnPluginStart()
 {
-	g_hBhopSpeed = CreateConVar("ai_JockeyBhopSpeed", "80.0", "Jockey 连跳的速度", CVAR_FLAG, true, 0.0);
+	g_hBhopSpeed = CreateConVar("ai_JockeyBhopSpeed", "125.0", "Jockey 连跳的速度", CVAR_FLAG, true, 0.0);
 	g_hStartHopDistance = CreateConVar("ai_JockeyStartHopDistance", "99999", "Jockey 距离生还者多少距离开始主动连跳", CVAR_FLAG, true, 0.0);
 	g_hJockeyStumbleRadius = CreateConVar("ai_JockeyStumbleRadius", "50", "Jockey 骑到人后会对多少范围内的生还者产生硬直效果", CVAR_FLAG, true, 0.0);
 	// 骗推设置
@@ -89,10 +97,11 @@ void GetInterControl_Cvars(ConVar convar, const char[] oldValue, const char[] ne
 public Action OnPlayerRunCmd(int jockey, int &buttons, int &impulse, float vel[3], float angles[3], int &weapon)
 {
 	if (!IsAiJockey(jockey) || !IsPlayerAlive(jockey)) { return Plugin_Continue; }
-	float fSpeed[3] = {0.0}, fCurrentSpeed = 0.0, fJockeyPos[3] = {0.0};
+	float fSpeed[3] = {0.0}, fCurrentSpeed = 0.0, fJockeyPos[3] = {0.0}, fclientEyeAngles[3] = {0.0};
 	GetEntPropVector(jockey, Prop_Data, "m_vecVelocity", fSpeed);
 	fCurrentSpeed = SquareRoot(Pow(fSpeed[0], 2.0) + Pow(fSpeed[1], 2.0));
 	GetClientAbsOrigin(jockey, fJockeyPos);
+	GetClientEyeAngles(jockey, fclientEyeAngles);
 	// 获取jockey状态
 	int iFlags = GetEntityFlags(jockey), iTarget = g_bCanAttackPinned[jockey] ? GetClientAimTarget(jockey, true) : GetClosetMobileSurvivor(jockey);
 	bool bHasSight = view_as<bool>(GetEntProp(jockey, Prop_Send, "m_hasVisibleThreats"));
@@ -178,7 +187,7 @@ public Action OnPlayerRunCmd(int jockey, int &buttons, int &impulse, float vel[3
 					&& actionPercent <= g_iActionArray[ACTION_JUMP_HIGH])
 				{
 					// 高跳
-					angles[0] = getRandomFloatInRange(45.0, 60.0) * -1.0;
+					angles[0] = getRandomFloatInRange(30.0, 45.0) * -1.0;
 					TeleportEntity(jockey, NULL_VECTOR, angles, NULL_VECTOR);
 					buttons |= IN_ATTACK;
 					SetState(jockey, 0, IN_ATTACK);
@@ -191,10 +200,31 @@ public Action OnPlayerRunCmd(int jockey, int &buttons, int &impulse, float vel[3
 		}
 		else
 		{
-			if (/*!g_bCanAttackPinned[jockey] && */Do_Bhop(jockey, buttons))
+			if(bHasSight)
 			{
+				buttons |= IN_DUCK;
+				buttons |= IN_JUMP;
+				if(buttons & IN_FORWARD)
+				{
+					Client_Push(jockey, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+				}
+				else if(buttons & IN_BACK)
+				{
+					fclientEyeAngles[1] += 180.0;
+					Client_Push(jockey, fclientEyeAngles, g_hBhopSpeed.FloatValue*2, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+				}
+				else if(buttons & IN_MOVELEFT)
+				{
+					fclientEyeAngles[1] += 45.0;
+					Client_Push(jockey, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+				}
+				else if(buttons & IN_MOVERIGHT)
+				{
+					fclientEyeAngles[1] += -45.0;
+					Client_Push(jockey, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+				}
 				SetState(jockey, 0, IN_JUMP);
-				return Plugin_Changed;
+				//return Plugin_Continue;
 			}
 		}
 	}
@@ -337,7 +367,7 @@ void StumbleByStanders(int pinnedSurvivor, int pinner)
 // ***** 方法 *****
 bool IsAiJockey(int client)
 {
-	return GetInfectedClass(client) == ZC_JOCKEY /* && IsFakeClient(client) */;
+	return GetInfectedClass(client) == ZC_JOCKEY  && IsFakeClient(client);
 }
 
 float NearestSurvivorDistance(int client)
@@ -410,138 +440,48 @@ int GetState(int client, int no)
 	return fBuffer;
 }*/
 
-// 方法，是否是 AI 猴
-bool IsJockey(int client)
+// 猴连跳
+stock void Client_Push(int client, float clientEyeAngle[3], float power,VelocityOverride override[3] = {VelocityOvr_None, VelocityOvr_None, VelocityOvr_None}) 
 {
-	return view_as<bool>(GetInfectedClass(client) == view_as<int>(ZC_JOCKEY) && IsFakeClient(client));
-}
-
-bool Do_Bhop(int client, int &buttons)
-{
-	if (!IsJockey(client) || !IsPlayerAlive(client))
-		return false;
-
-	float vAng[3], vRight[3], vVel[3];
-	GetClientEyeAngles(client, vAng);
-	GetAngleVectors(vAng, vAng, NULL_VECTOR, NULL_VECTOR);
-	NormalizeVector(vAng, vAng);
-	CopyVectors(vAng, vRight);
-
-	if (buttons & IN_FORWARD || buttons & IN_BACK) {
-		ScaleVector(vAng, (buttons & IN_FORWARD == IN_FORWARD) ? g_hBhopSpeed.FloatValue : -g_hBhopSpeed.FloatValue);
-	}
-	if (buttons & IN_MOVELEFT || buttons & IN_MOVERIGHT) {
-		ScaleVector(vRight, (buttons & IN_MOVELEFT == IN_MOVELEFT) ? g_hBhopSpeed.FloatValue : -g_hBhopSpeed.FloatValue);
-	}
-
-	AddVectors(vAng, vRight, vAng);
-	GetEntPropVector(client, Prop_Data, "m_vecAbsVelocity", vVel);
-	AddVectors(vVel, vAng, vVel);
-
-	if (!bWontFall(client, vVel))
-		return false;
-
-	buttons |= IN_DUCK;
-	buttons |= IN_JUMP;
-	TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vVel);
-	return true;
-}
-
-bool bWontFall(int client, const float vVel[3]) {
-	static float vPos[3];
-	static float vEnd[3];
-	GetClientAbsOrigin(client, vPos);
-	AddVectors(vPos, vVel, vEnd);
-
-	static float vMins[3];
-	static float vMaxs[3];
-	GetClientMins(client, vMins);
-	GetClientMaxs(client, vMaxs);
-
-	static bool bDidHit;
-	static Handle hTrace;
-	static float vVec[3];
-	static float vNor[3];
-	static float vPlane[3];
-
-	bDidHit = false;
-	vPos[2] += 10.0;
-	vEnd[2] += 10.0;
-	hTrace = TR_TraceHullFilterEx(vPos, vEnd, vMins, vMaxs, MASK_PLAYERSOLID_BRUSHONLY, bTraceEntityFilter);
-	if (TR_DidHit(hTrace)) {
-		bDidHit = true;
-		TR_GetEndPosition(vVec, hTrace);
-		NormalizeVector(vVel, vNor);
-		TR_GetPlaneNormal(hTrace, vPlane);
-		if (RadToDeg(ArcCosine(GetVectorDotProduct(vNor, vPlane))) > 150.0) {
-			delete hTrace;
-			return false;
-		}
-	}
-
-	delete hTrace;
-	if (!bDidHit)
-		vVec = vEnd;
-
-	static float vDown[3];
-	vDown[0] = vVec[0];
-	vDown[1] = vVec[1];
-	vDown[2] = vVec[2] - 100000.0;
-
-	hTrace = TR_TraceHullFilterEx(vVec, vDown, vMins, vMaxs, MASK_PLAYERSOLID_BRUSHONLY, bTraceEntityFilter);
-	if (TR_DidHit(hTrace)) {
-		TR_GetEndPosition(vEnd, hTrace);
-		if (vVec[2] - vEnd[2] > 128.0) {
-			delete hTrace;
-			return false;
-		}
-
-		static int iEnt;
-		if ((iEnt = TR_GetEntityIndex(hTrace)) > MaxClients) {
-			static char cls[13];
-			GetEdictClassname(iEnt, cls, sizeof cls);
-			if (strcmp(cls, "trigger_hurt") == 0) {
-				delete hTrace;
-				return false;
+	float forwardVector[3];
+	float newVel[3];
+	
+	GetAngleVectors(clientEyeAngle, forwardVector, NULL_VECTOR, NULL_VECTOR);
+	NormalizeVector(forwardVector, forwardVector);
+	ScaleVector(forwardVector, power);
+	//PrintToChatAll("Tank velocity: %.2f", forwardVector[1]);
+	
+	GetEntPropVector(client, Prop_Data, "m_vecAbsVelocity", newVel);
+	
+	for( int i = 0; i < 3; i++ ) 
+	{
+		switch( override[i] ) 
+		{
+			case VelocityOvr_Velocity: 
+			{
+				newVel[i] = 0.0;
+			}
+			case VelocityOvr_OnlyWhenNegative: 
+			{				
+				if( newVel[i] < 0.0 ) 
+				{
+					newVel[i] = 0.0;
+				}
+			}
+			case VelocityOvr_InvertReuseVelocity: 
+			{				
+				if( newVel[i] < 0.0 ) 
+				{
+					newVel[i] *= -1.0;
+				}
 			}
 		}
-		delete hTrace;
-		return true;
+		
+		newVel[i] += forwardVector[i];
 	}
-
-	delete hTrace;
-	return false;
+	
+	SetEntPropVector(client, Prop_Data, "m_vecAbsVelocity", newVel);
 }
-
-bool bTraceEntityFilter(int entity, int contentsMask) {
-	if (entity <= MaxClients)
-		return false;
-
-	static char cls[9];
-	GetEntityClassname(entity, cls, sizeof cls);
-	if ((cls[0] == 'i' && strcmp(cls[1], "nfected") == 0) || (cls[0] == 'w' && strcmp(cls[1], "itch") == 0))
-		return false;
-
-	return true;
-}
-
-/*bool jockeyDoBhop(int client, int &buttons, float vec[3])
-{
-	if (buttons & IN_FORWARD || buttons & IN_MOVELEFT || buttons & IN_MOVERIGHT)
-	{
-		ClientPush(client, vec);
-		return true;
-	}
-	return false;
-}*/
-
-/*void ClientPush(int client, float fForwardVec[3])
-{
-	float fCurVelVec[3];
-	GetEntPropVector(client, Prop_Data, "m_vecAbsVelocity", fCurVelVec);
-	AddVectors(fCurVelVec, fForwardVec, fCurVelVec);
-	TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, fCurVelVec);
-}*/
 
 int getRandomIntInRange(int min, int max)
 {

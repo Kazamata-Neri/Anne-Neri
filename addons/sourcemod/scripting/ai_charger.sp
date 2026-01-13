@@ -11,6 +11,14 @@
 #define NAV_MESH_HEIGHT 20.0
 #define FALL_DETECT_HEIGHT 120.0
 
+// Velocity
+enum VelocityOverride {
+	VelocityOvr_None = 0,
+	VelocityOvr_Velocity,
+	VelocityOvr_OnlyWhenNegative,
+	VelocityOvr_InvertReuseVelocity
+};
+
 public Plugin myinfo = 
 {
 	name 			= "Ai Charger 增强 2.0 版本",
@@ -32,14 +40,22 @@ bool can_attack_pinned[MAXPLAYERS + 1] = {false}, is_charging[MAXPLAYERS + 1] = 
 // Ints
 int survivor_num = 0, ranged_client[MAXPLAYERS + 1][MAXPLAYERS + 1], ranged_index[MAXPLAYERS + 1] = {0};
 
+// Enums
+enum AimType
+{
+	AimEye,
+	AimBody,
+	AimChest
+};
+
 public void OnPluginStart()
 {
 	// CreateConVars
 	g_hAllowBhop = CreateConVar("ai_ChargerBhop", "1", "是否开启 Charger 连跳", CVAR_FLAG, true, 0.0, true, 1.0);
-	g_hBhopSpeed = CreateConVar("ai_ChagrerBhopSpeed", "80.0", "Charger 连跳速度", CVAR_FLAG, true, 0.0);
+	g_hBhopSpeed = CreateConVar("ai_ChagrerBhopSpeed", "100.0", "Charger 连跳速度", CVAR_FLAG, true, 0.0);
 	g_hChargeDist = CreateConVar("ai_ChargerChargeDistance", "300.0", "Charger 只能在与目标小于这一距离时冲锋", CVAR_FLAG, true, 0.0);
 	g_hExtraTargetDist = CreateConVar("ai_ChargerExtraTargetDistance", "0,350", "Charger 会在这一范围内寻找其他有效的目标（中间用逗号隔开，不要有空格）", CVAR_FLAG);
-	g_hAimOffset = CreateConVar("ai_ChargerAimOffset", "90.0", "目标的瞄准水平与 Charger 处在这一范围内，Charger 不会冲锋", CVAR_FLAG, true, 0.0);
+	g_hAimOffset = CreateConVar("ai_ChargerAimOffset", "180.0", "目标的瞄准水平与 Charger 处在这一范围内，Charger 不会冲锋", CVAR_FLAG, true, 0.0);
 	g_hAllowMeleeAvoid = CreateConVar("ai_ChargerMeleeAvoid", "0", "是否开启 Charger 近战回避", CVAR_FLAG, true, 0.0, true, 1.0);
 	g_hChargerMeleeDamage = CreateConVar("ai_ChargerMeleeDamage", "1", "Charger 血量小于这个值，将不会直接冲锋拿着近战的生还者", CVAR_FLAG, true, 0.0);
 	g_hChargerTarget = CreateConVar("ai_ChargerTarget", "1", "Charger目标选择：1=自然目标选择，2=优先取最近目标，3=优先撞人多处", CVAR_FLAG, true, 1.0, true, 2.0);
@@ -73,9 +89,10 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 	if (IsCharger(client) && IsPlayerAlive(client))
 	{
 		bool has_sight = view_as<bool>(GetEntProp(client, Prop_Send, "m_hasVisibleThreats"));
-		float self_pos[3] = {0.0}, target_pos[3] = {0.0}, vec_speed[3] = {0.0}/*, vel_buffer[3] = {0.0}*/, cur_speed = 0.0;
+		float self_pos[3] = {0.0}, vec_speed[3] = {0.0}, fclientEyeAngles[3] = {0.0}, cur_speed = 0.0;
 		int target = GetClientAimTarget(client, true), flags = GetEntityFlags(client), iNearestTarget = GetClosestSurvivor(self_pos), closet_survivor_distance = GetClosetSurvivorDistance(client), ability = GetEntPropEnt(client, Prop_Send, "m_customAbility");
 		GetClientAbsOrigin(client, self_pos);
+		GetClientEyeAngles(client, fclientEyeAngles);
 		GetEntPropVector(client, Prop_Data, "m_vecVelocity", vec_speed);
 		cur_speed = SquareRoot(Pow(vec_speed[0], 2.0) + Pow(vec_speed[1], 2.0));
 		survivor_num = GetSurvivorCount(true, false);
@@ -122,14 +139,14 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 					}
 				}
 				// 目标正在看着自身，自身可以冲锋，目标没有拿着近战，且不在倒地或起身状态时则直接冲锋，目标拿着近战，则转到 OnChooseVictim 处理，转移新目标或继续挥拳
-				else if (Is_Target_Watching_Attacker(client, target, g_hAimOffset.IntValue) && !Client_MeleeCheck(target) && !Is_InGetUp_Or_Incapped(target) && GetEntProp(ability, Prop_Send, "m_isCharging") != 1/* && (flags & FL_ONGROUND)*/)
+				else if (Is_Target_Watching_Attacker(client, target, g_hAimOffset.IntValue) && !Client_MeleeCheck(target) && !Is_InGetUp_Or_Incapped(target) && GetEntProp(ability, Prop_Send, "m_isCharging") != 1 && (flags & FL_ONGROUND))
 				{
 					SetCharge(client);
 					buttons |= IN_ATTACK2;
 					buttons |= IN_ATTACK;
 					return Plugin_Changed;
 				}
-				else if(Is_Target_Watching_Attacker(client, target, g_hAimOffset.IntValue) && Client_MeleeCheck(target) && !Is_InGetUp_Or_Incapped(target) && GetEntProp(ability, Prop_Send, "m_isCharging") != 1/* && (flags & FL_ONGROUND) */&& !g_hAllowMeleeAvoid.BoolValue)
+				else if(Is_Target_Watching_Attacker(client, target, g_hAimOffset.IntValue) && Client_MeleeCheck(target) && !Is_InGetUp_Or_Incapped(target) && GetEntProp(ability, Prop_Send, "m_isCharging") != 1 && (flags & FL_ONGROUND) && !g_hAllowMeleeAvoid.BoolValue)
 				{
 					SetCharge(client);
 					buttons |= IN_ATTACK2;
@@ -184,18 +201,36 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 		}
 		// 连跳，并阻止冲锋，可以攻击被控的人的时，将最小距离置 0，连跳追上被控的人
 		//int bhopMinDist = can_attack_pinned[client] ? 0 : -1/*g_hChargeDist.IntValue*/;
-		if (/*has_sight && */g_hAllowBhop.BoolValue/* && bhopMinDist < closet_survivor_distance */&& cur_speed > 220.0 && IsValidSurvivor(iNearestTarget) && !is_charging[client] && !IsPinningSurvivor(client))
+		if (/*has_sight && */g_hAllowBhop.BoolValue/* && bhopMinDist < closet_survivor_distance */&& cur_speed > 220.0/* && IsValidSurvivor(iNearestTarget) */&& !is_charging[client] && !IsPinningSurvivor(client))
 		{
 			if (flags & FL_ONGROUND)
 			{
-				GetClientAbsOrigin(iNearestTarget, target_pos);
-				//vel_buffer = CalculateVel(self_pos, target_pos, g_hBhopSpeed.FloatValue);
-				//buttons |= IN_JUMP;
-				//buttons |= IN_DUCK;
-				if (Do_Bhop(client, buttons))
+				buttons |= IN_DUCK;
+				buttons |= IN_JUMP;
+				if(buttons & IN_FORWARD)
 				{
-					return Plugin_Changed;
+					Client_Push(client, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
 				}
+				else if(buttons & IN_BACK)
+				{
+					fclientEyeAngles[1] += 180.0;
+					Client_Push(client, fclientEyeAngles, g_hBhopSpeed.FloatValue*2, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+				}
+				else if(buttons & IN_MOVELEFT)
+				{
+					fclientEyeAngles[1] += 45.0;
+					Client_Push(client, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+				}
+				else if(buttons & IN_MOVERIGHT)
+				{
+					fclientEyeAngles[1] += -45.0;
+					Client_Push(client, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+				}
+				else
+				{
+					Client_Push(client, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+				}
+				//return Plugin_Continue;
 			}
 		}
 		// 梯子上，阻止连跳
@@ -294,6 +329,7 @@ public Action L4D2_OnChooseVictim(int specialInfected, int &curTarget)
 	}
 	return Plugin_Continue;
 }
+
 void Get_MeleeNum(int &melee_num, int &new_target)
 {
 	int active_weapon = -1;
@@ -460,133 +496,48 @@ int FindRangedClients(int client, float min_range, float max_range)
 	return index;
 }
 // 牛连跳
-bool Do_Bhop(int client, int &buttons)
+stock void Client_Push(int client, float clientEyeAngle[3], float power, VelocityOverride override[3] = {VelocityOvr_None, VelocityOvr_None, VelocityOvr_None}) 
 {
-	if (!IsCharger(client) || !IsPlayerAlive(client))
-		return false;
-
-	float vAng[3], vRight[3], vVel[3];
-	GetClientEyeAngles(client, vAng);
-	GetAngleVectors(vAng, vAng, NULL_VECTOR, NULL_VECTOR);
-	NormalizeVector(vAng, vAng);
-	CopyVectors(vAng, vRight);
-
-	if (buttons & IN_FORWARD || buttons & IN_BACK) {
-		ScaleVector(vAng, (buttons & IN_FORWARD == IN_FORWARD) ? g_hBhopSpeed.FloatValue : -g_hBhopSpeed.FloatValue);
-	}
-	if (buttons & IN_MOVELEFT || buttons & IN_MOVERIGHT) {
-		ScaleVector(vRight, (buttons & IN_MOVELEFT == IN_MOVELEFT) ? g_hBhopSpeed.FloatValue : -g_hBhopSpeed.FloatValue);
-	}
-
-	AddVectors(vAng, vRight, vAng);
-	GetEntPropVector(client, Prop_Data, "m_vecAbsVelocity", vVel);
-	AddVectors(vVel, vAng, vVel);
-
-	if (!bWontFall(client, vVel))
-		return false;
-
-	buttons |= IN_DUCK;
-	buttons |= IN_JUMP;
-	TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vVel);
-	return true;
-}
-
-bool bWontFall(int client, const float vVel[3]) {
-	static float vPos[3];
-	static float vEnd[3];
-	GetClientAbsOrigin(client, vPos);
-	AddVectors(vPos, vVel, vEnd);
-
-	static float vMins[3];
-	static float vMaxs[3];
-	GetClientMins(client, vMins);
-	GetClientMaxs(client, vMaxs);
-
-	static bool bDidHit;
-	static Handle hTrace;
-	static float vVec[3];
-	static float vNor[3];
-	static float vPlane[3];
-
-	bDidHit = false;
-	vPos[2] += 10.0;
-	vEnd[2] += 10.0;
-	hTrace = TR_TraceHullFilterEx(vPos, vEnd, vMins, vMaxs, MASK_PLAYERSOLID_BRUSHONLY, bTraceEntityFilter);
-	if (TR_DidHit(hTrace)) {
-		bDidHit = true;
-		TR_GetEndPosition(vVec, hTrace);
-		NormalizeVector(vVel, vNor);
-		TR_GetPlaneNormal(hTrace, vPlane);
-		if (RadToDeg(ArcCosine(GetVectorDotProduct(vNor, vPlane))) > 150.0) {
-			delete hTrace;
-			return false;
-		}
-	}
-
-	delete hTrace;
-	if (!bDidHit)
-		vVec = vEnd;
-
-	static float vDown[3];
-	vDown[0] = vVec[0];
-	vDown[1] = vVec[1];
-	vDown[2] = vVec[2] - 100000.0;
-
-	hTrace = TR_TraceHullFilterEx(vVec, vDown, vMins, vMaxs, MASK_PLAYERSOLID_BRUSHONLY, bTraceEntityFilter);
-	if (TR_DidHit(hTrace)) {
-		TR_GetEndPosition(vEnd, hTrace);
-		if (vVec[2] - vEnd[2] > 128.0) {
-			delete hTrace;
-			return false;
-		}
-
-		static int iEnt;
-		if ((iEnt = TR_GetEntityIndex(hTrace)) > MaxClients) {
-			static char cls[13];
-			GetEdictClassname(iEnt, cls, sizeof cls);
-			if (strcmp(cls, "trigger_hurt") == 0) {
-				delete hTrace;
-				return false;
+	float forwardVector[3];
+	float newVel[3];
+	
+	GetAngleVectors(clientEyeAngle, forwardVector, NULL_VECTOR, NULL_VECTOR);
+	NormalizeVector(forwardVector, forwardVector);
+	ScaleVector(forwardVector, power);
+	//PrintToChatAll("Tank velocity: %.2f", forwardVector[1]);
+	
+	GetEntPropVector(client, Prop_Data, "m_vecAbsVelocity", newVel);
+	
+	for( int i = 0; i < 3; i++ ) 
+	{
+		switch( override[i] ) 
+		{
+			case VelocityOvr_Velocity: 
+			{
+				newVel[i] = 0.0;
+			}
+			case VelocityOvr_OnlyWhenNegative: 
+			{				
+				if( newVel[i] < 0.0 ) 
+				{
+					newVel[i] = 0.0;
+				}
+			}
+			case VelocityOvr_InvertReuseVelocity: 
+			{				
+				if( newVel[i] < 0.0 ) 
+				{
+					newVel[i] *= -1.0;
+				}
 			}
 		}
-		delete hTrace;
-		return true;
+		
+		newVel[i] += forwardVector[i];
 	}
-
-	delete hTrace;
-	return false;
+	
+	SetEntPropVector(client, Prop_Data, "m_vecAbsVelocity", newVel);
 }
 
-bool bTraceEntityFilter(int entity, int contentsMask) {
-	if (entity <= MaxClients)
-		return false;
-
-	static char cls[9];
-	GetEntityClassname(entity, cls, sizeof cls);
-	if ((cls[0] == 'i' && strcmp(cls[1], "nfected") == 0) || (cls[0] == 'w' && strcmp(cls[1], "itch") == 0))
-		return false;
-
-	return true;
-}
-
-/*bool ClientPush(int client, float vec[3])
-{
-	float curvel[3] = {0.0};
-	GetEntPropVector(client, Prop_Data, "m_vecAbsVelocity", curvel);
-	AddVectors(curvel, vec, curvel);
-	if (Dont_HitWall_Or_Fall(client, curvel))
-	{
-		if (GetVectorLength(curvel) <= 250.0)
-		{
-			PrintToChatAll("fix vector length");
-			NormalizeVector(curvel, curvel);
-			ScaleVector(curvel, 251.0);
-		}
-		TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, curvel);
-		return true;
-	}
-	return false;
-}*/
 // 计算与目标之间的向量
 /*float[] CalculateVel(float self_pos[3], float target_pos[3], float force)
 {

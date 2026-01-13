@@ -34,8 +34,7 @@ ConVar
 	g_hBhopSpeed,
 	g_hTargetPolicy,
 	g_hPinnedPriority,
-	g_hKilledAfterSpit,
-	g_hSpitRange;
+	g_hKilledAfterSpit;
 float
 	clientDelay[MAXPLAYERS + 1][8];
 int
@@ -51,19 +50,18 @@ enum
 	NEAREST_TARGET,
 	PINNED_TARGET,
 	CROWDED_TARGET
-}
+};
 
 public void OnPluginStart()
 {
 	g_hAllowBhop = CreateConVar("ai_SpitterBhop", "1", "是否开启 Spitter 连跳功能", CVAR_FLAG, true, 0.0, true, 1.0);
 	g_hBhopSpeed = CreateConVar("ai_SpitterBhopSpeed", "100", "Spitter 连跳的速度", CVAR_FLAG, true, 0.0);
-	g_hTargetPolicy = CreateConVar("ai_SpitterTarget", "2", "Spitter 目标选择：1=默认 2=最近 3=被控优先，否则第一个生还 4=人多处", CVAR_FLAG, true, 1.0, true, 4.0);
+	g_hTargetPolicy = CreateConVar("ai_SpitterTarget", "3", "Spitter 目标选择：1=默认 2=最近 3=被控优先，否则第一个生还 4=人多处", CVAR_FLAG, true, 1.0, true, 4.0);
 	g_hPinnedPriority = CreateConVar("ai_SpitterPinnedPr", "6,3,1,5", "被控目标优先级（被控特感编号，逗号分隔）", CVAR_FLAG);
 	g_hKilledAfterSpit = CreateConVar("ai_SpiiterDieAfterSpit", "0", "是否开启 Spitter 吐完痰后处死功能", CVAR_FLAG, true, 0.0, true, 1.0);
 	// HookEvent
 	HookEvent("ability_use", abilityUseHandler);
 	// AddChangeHook
-	g_hSpitRange = FindConVar("z_spit_range");
 	g_hPinnedPriority.AddChangeHook(pinnedPriorityCvarChangedHandler);
 	// GetPriority
 	getPinnedPriority();
@@ -98,9 +96,11 @@ public Action killSpitterHandler(Handle timer, int client)
 public Action OnPlayerRunCmd(int spitter, int& buttons, int& impulse, float vel[3], float angles[3], int& weapon, int& subtype, int& cmdnum, int& tickcount, int& seed, int mouse[2])
 {
 	if (!isAiSpitter(spitter) || !IsPlayerAlive(spitter)) { return Plugin_Continue; }
-	static float velVec[3],  curSpeed, fclientEyeAngles[3] = {0.0};
+	static float velVec[3],  curSpeed;
+	float fclientEyeAngles[3] = {0.0};
 	//static int targetDist;
 	GetEntPropVector(spitter, Prop_Data, "m_vecVelocity", velVec);
+	GetClientEyeAngles(spitter, fclientEyeAngles);
 	curSpeed = SquareRoot(Pow(velVec[0], 2.0) + Pow(velVec[1], 2.0));
 	//targetDist = GetClosetSurvivorDistance(spitter);
 	if (GetEntityMoveType(spitter) & MOVETYPE_LADDER)
@@ -117,15 +117,30 @@ public Action OnPlayerRunCmd(int spitter, int& buttons, int& impulse, float vel[
 	if (!(/*targetDist < 1000.0 && */curSpeed > 180.0) || !(GetEntityFlags(spitter) & FL_ONGROUND) || !g_hAllowBhop.BoolValue) { return Plugin_Continue; }
 	buttons |= IN_DUCK;
 	buttons |= IN_JUMP;
-	if(buttons & IN_BACK)
-	{
-		Client_Push(spitter, fclientEyeAngles, -g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
-	}
-	else if(buttons & IN_FORWARD || buttons & IN_MOVELEFT || buttons & IN_MOVERIGHT)
+	if(buttons & IN_FORWARD)
 	{
 		Client_Push(spitter, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
-	}		
-	
+	}
+	else if(buttons & IN_BACK)
+	{
+		fclientEyeAngles[1] += 180.0;
+		Client_Push(spitter, fclientEyeAngles, g_hBhopSpeed.FloatValue*2, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+	}
+	else if(buttons & IN_MOVELEFT)
+	{
+		fclientEyeAngles[1] += 45.0;
+		Client_Push(spitter, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+	}
+	else if(buttons & IN_MOVERIGHT)
+	{
+		fclientEyeAngles[1] += -45.0;
+		Client_Push(spitter, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+	}
+	else
+	{
+		Client_Push(spitter, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+	}
+	return Plugin_Continue;
 }
 
 public Action L4D2_OnChooseVictim(int specialInfected, int &curTarget)
@@ -148,7 +163,7 @@ public Action L4D2_OnChooseVictim(int specialInfected, int &curTarget)
 			if (IsValidSurvivor(pinnedTarget) && IsPlayerAlive(pinnedTarget))
 			{
 				GetEntPropVector(pinnedTarget, Prop_Send, "m_vecOrigin", targetPos);
-				if (GetVectorDistance(selfPos, targetPos) > g_hSpitRange.FloatValue) { return Plugin_Continue; }
+				//if (GetVectorDistance(selfPos, targetPos) > g_hSpitRange.FloatValue) { return Plugin_Continue; }
 				curTarget = pinnedTarget;
 				return Plugin_Changed;
 			}
@@ -158,7 +173,7 @@ public Action L4D2_OnChooseVictim(int specialInfected, int &curTarget)
 			if (IsValidSurvivor(crowdedTarget) && IsPlayerAlive(crowdedTarget))
 			{
 				GetEntPropVector(pinnedTarget, Prop_Send, "m_vecOrigin", targetPos);
-				if (GetVectorDistance(selfPos, targetPos) > g_hSpitRange.FloatValue) { return Plugin_Continue; }
+				//if (GetVectorDistance(selfPos, targetPos) > g_hSpitRange.FloatValue) { return Plugin_Continue; }
 				curTarget = crowdedTarget;
 				return Plugin_Changed;
 			}
@@ -167,8 +182,7 @@ public Action L4D2_OnChooseVictim(int specialInfected, int &curTarget)
 	return Plugin_Continue;
 }
 
-// 方法
-// 连跳操作
+// 口水连跳
 stock void Client_Push(int client, float clientEyeAngle[3], float power,VelocityOverride override[3] = {VelocityOvr_None, VelocityOvr_None, VelocityOvr_None}) 
 {
 	float forwardVector[3];
@@ -211,6 +225,129 @@ stock void Client_Push(int client, float clientEyeAngle[3], float power,Velocity
 	SetEntPropVector(client, Prop_Data, "m_vecAbsVelocity", newVel);
 }
 
+
+// 方法
+/*bool IsAiSpitter(int client)
+{
+	if(IsFakeClient(client) && GetClientTeam(client) == TEAM_INFECTED && IsPlayerAlive(client) && GetEntProp(client, Prop_Send, "m_zombieClass") == ZC_SPITTER && GetEntProp(client, Prop_Send, "m_isGhost") != 1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}*/
+
+// 连跳操作
+/*bool Do_Bhop(int client, int &buttons)
+{
+	if (!IsAiSpitter(client) || !IsPlayerAlive(client))
+		return false;
+
+	float vAng[3], vRight[3], vVel[3];
+	GetClientEyeAngles(client, vAng);
+	GetAngleVectors(vAng, vAng, NULL_VECTOR, NULL_VECTOR);
+	NormalizeVector(vAng, vAng);
+	CopyVectors(vAng, vRight);
+
+	if (buttons & IN_FORWARD || buttons & IN_BACK) {
+		ScaleVector(vAng, (buttons & IN_FORWARD == IN_FORWARD) ? g_hBhopSpeed.FloatValue : -g_hBhopSpeed.FloatValue);
+	}
+	if (buttons & IN_MOVELEFT || buttons & IN_MOVERIGHT) {
+		ScaleVector(vRight, (buttons & IN_MOVELEFT == IN_MOVELEFT) ? g_hBhopSpeed.FloatValue : -g_hBhopSpeed.FloatValue);
+	}
+
+	AddVectors(vAng, vRight, vAng);
+	GetEntPropVector(client, Prop_Data, "m_vecAbsVelocity", vVel);
+	AddVectors(vVel, vAng, vVel);
+
+	if (!bWontFall(client, vVel))
+		return false;
+
+	buttons |= IN_DUCK;
+	buttons |= IN_JUMP;
+	TeleportEntity(client, NULL_VECTOR, NULL_VECTOR, vVel);
+	return true;
+}*/
+
+/*bool bWontFall(int client, const float vVel[3]) {
+	static float vPos[3];
+	static float vEnd[3];
+	GetClientAbsOrigin(client, vPos);
+	AddVectors(vPos, vVel, vEnd);
+
+	static float vMins[3];
+	static float vMaxs[3];
+	GetClientMins(client, vMins);
+	GetClientMaxs(client, vMaxs);
+
+	static bool bDidHit;
+	static Handle hTrace;
+	static float vVec[3];
+	static float vNor[3];
+	static float vPlane[3];
+
+	bDidHit = false;
+	vPos[2] += 10.0;
+	vEnd[2] += 10.0;
+	hTrace = TR_TraceHullFilterEx(vPos, vEnd, vMins, vMaxs, MASK_PLAYERSOLID_BRUSHONLY, bTraceEntityFilter);
+	if (TR_DidHit(hTrace)) {
+		bDidHit = true;
+		TR_GetEndPosition(vVec, hTrace);
+		NormalizeVector(vVel, vNor);
+		TR_GetPlaneNormal(hTrace, vPlane);
+		if (RadToDeg(ArcCosine(GetVectorDotProduct(vNor, vPlane))) > 150.0) {
+			delete hTrace;
+			return false;
+		}
+	}
+
+	delete hTrace;
+	if (!bDidHit)
+		vVec = vEnd;
+
+	static float vDown[3];
+	vDown[0] = vVec[0];
+	vDown[1] = vVec[1];
+	vDown[2] = vVec[2] - 100000.0;
+
+	hTrace = TR_TraceHullFilterEx(vVec, vDown, vMins, vMaxs, MASK_PLAYERSOLID_BRUSHONLY, bTraceEntityFilter);
+	if (TR_DidHit(hTrace)) {
+		TR_GetEndPosition(vEnd, hTrace);
+		if (vVec[2] - vEnd[2] > 128.0) {
+			delete hTrace;
+			return false;
+		}
+
+		static int iEnt;
+		if ((iEnt = TR_GetEntityIndex(hTrace)) > MaxClients) {
+			static char cls[13];
+			GetEdictClassname(iEnt, cls, sizeof cls);
+			if (strcmp(cls, "trigger_hurt") == 0) {
+				delete hTrace;
+				return false;
+			}
+		}
+		delete hTrace;
+		return true;
+	}
+
+	delete hTrace;
+	return false;
+}*/
+
+/*bool bTraceEntityFilter(int entity, int contentsMask) {
+	if (entity <= MaxClients)
+		return false;
+
+	static char cls[9];
+	GetEntityClassname(entity, cls, sizeof cls);
+	if ((cls[0] == 'i' && strcmp(cls[1], "nfected") == 0) || (cls[0] == 'w' && strcmp(cls[1], "itch") == 0))
+		return false;
+
+	return true;
+}*/
 /*void clientPush(int client, float eyeAngle[3], float force)
 {
 	static float eyeAngleVec[3], velVec[3];
@@ -325,12 +462,16 @@ int getTargetByPriority()
 			delete flowList;
 			return -1;
 		}
+		// 两名及以上生还者
 		flowList.Sort(Sort_Descending, Sort_Float);
 		if (flowList.Length >= 2)
 		{
 			i = flowList.Get(0, 1);
 			delete flowList;
-			return i;
+			if(!IsClientIncapped(i))
+			{
+				return i;
+			}
 		}
 	}
 	// 根据优先级选取被控玩家
@@ -338,10 +479,10 @@ int getTargetByPriority()
 	{
 		switch (pinnedPriority[i])
 		{
-			case ZC_SMOKER: { if (IsValidSurvivor(pulledTarget)) { return pulledTarget; } }
+			case ZC_CHARGER: { if (IsValidSurvivor(pummelTarget)) { return pummelTarget; } }
 			case ZC_HUNTER: { if (IsValidSurvivor(pouncedTarget)) { return pouncedTarget; } }
 			case ZC_JOCKEY: { if (IsValidSurvivor(jockedTarget)) { return jockedTarget; } }
-			case ZC_CHARGER: { if (IsValidSurvivor(pummelTarget)) { return pummelTarget; } }
+			case ZC_SMOKER: { if (IsValidSurvivor(pulledTarget)) { return pulledTarget; } }
 		}
 	}
 	return -1;

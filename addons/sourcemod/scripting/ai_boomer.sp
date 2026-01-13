@@ -38,7 +38,7 @@ public Plugin myinfo =
 	url 			= "https://steamcommunity.com/id/saku_ra/"
 }
 
-ConVar g_hAllowBhop, g_hBhopSpeed, g_hUpVision, g_hTurnVision, g_hForceBile, g_hBileFindRange, g_hVomitRange, g_hVomitDuration, g_hVomitInterval, g_hTurnInterval;
+ConVar g_hAllowBhop, g_hBhopSpeed, g_hUpVision, g_hTurnVision, g_hForceBile, g_hBileFindRange, g_hVomitRange, g_hVomitMaxDamageDist, g_hVomitDuration, g_hVomitInterval, g_hTurnInterval;
 // Bools
 bool can_bile[MAXPLAYERS + 1] = { true }, in_bile_interval[MAXPLAYERS + 1] = { false };
 // Ints，bile_frame 0 位：当前目标索引，1 位：循环次数
@@ -52,13 +52,14 @@ public void OnPluginStart()
 {
 	// CreateConVars
 	g_hAllowBhop = CreateConVar("ai_BoomerBhop", "1", "是否开启 Boomer 连跳", CVAR_FLAG, true, 0.0, true, 1.0);
-	g_hBhopSpeed = CreateConVar("ai_BoomerBhopSpeed", "100.0", "Boomer 连跳速度", CVAR_FLAG, true, 0.0);
-	g_hUpVision = CreateConVar("ai_BoomerUpVision", "0", "Boomer 喷吐时是否上抬视角", CVAR_FLAG, true, 0.0, true, 1.0);
+	g_hBhopSpeed = CreateConVar("ai_BoomerBhopSpeed", "120.0", "Boomer 连跳速度", CVAR_FLAG, true, 0.0);
+	g_hUpVision = CreateConVar("ai_BoomerUpVision", "1", "Boomer 喷吐时是否上抬视角", CVAR_FLAG, true, 0.0, true, 1.0);
 	g_hTurnVision = CreateConVar("ai_BoomerTurnVision", "1", "Boomer 喷吐时是否旋转视角", CVAR_FLAG, true, 0.0, true, 1.0);
-	g_hForceBile = CreateConVar("ai_BoomerForceBile", "0", "是否开启生还者到 Boomer 喷吐范围内强制被喷", CVAR_FLAG, true, 0.0, true, 1.0);
+	g_hForceBile = CreateConVar("ai_BoomerForceBile", "1", "是否开启生还者到 Boomer 喷吐范围内强制被喷", CVAR_FLAG, true, 0.0, true, 1.0);
 	g_hBileFindRange = CreateConVar("ai_BoomerBileFindRange", "400", "在这个距离内有被控或倒地的生还 Boomer 会优先攻击，0 = 关闭此功能", CVAR_FLAG, true, 0.0);
 	g_hTurnInterval = CreateConVar("ai_BoomerTurnInterval", "5", "Boomer 喷吐旋转视角时每隔多少帧转移一个目标", CVAR_FLAG, true, 0.0);
 	g_hVomitRange = FindConVar("z_vomit_range");
+	g_hVomitMaxDamageDist = FindConVar("z_vomit_maxdamagedist");
 	g_hVomitDuration = FindConVar("z_vomit_duration");
 	g_hVomitInterval = FindConVar("z_vomit_interval");
 	// HookEvents
@@ -150,7 +151,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 			}
 		}
 		// 靠近生还者，立即喷吐
-		if ((flags & FL_ONGROUND) && IsValidSurvivor(target) && has_sight && closet_survivor_dist <= RoundToNearest(0.8 * g_hVomitRange.FloatValue) && !in_bile_interval[client] && can_bile[client] && Player_IsVisible_To(target, client))
+		if ((flags & FL_ONGROUND) && IsValidSurvivor(target) && has_sight && closet_survivor_dist <= RoundToNearest(1.0 * g_hVomitRange.FloatValue) && !in_bile_interval[client] && can_bile[client] && Player_IsVisible_To(target, client))
 		{
 			buttons |= IN_FORWARD;
 			buttons |= IN_ATTACK;
@@ -175,7 +176,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 					Handle hTrace = TR_TraceRayFilterEx(self_eye_pos, target_eye_pos, MASK_VISIBLE, RayType_EndPoint, TR_RayFilter, client);
 					if (!TR_DidHit(hTrace) || TR_GetEntityIndex(hTrace) == i)
 					{
-						if (GetVectorDistance(self_eye_pos, target_eye_pos) <= g_hVomitRange.FloatValue)
+						if (GetVectorDistance(self_eye_pos, target_eye_pos) <= g_hVomitMaxDamageDist.FloatValue)
 						{
 							L4D_CTerrorPlayer_OnVomitedUpon(i, client);
 						}
@@ -190,11 +191,26 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 		{
 			buttons |= IN_DUCK;
 			buttons |= IN_JUMP;
-			if(buttons & IN_BACK)
+			if(buttons & IN_FORWARD)
 			{
-				Client_Push(client, fclientEyeAngles, -g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+				Client_Push(client, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
 			}
-			else if(buttons & IN_FORWARD || buttons & IN_MOVELEFT || buttons & IN_MOVERIGHT)
+			else if(buttons & IN_BACK)
+			{
+				fclientEyeAngles[1] += 180.0;
+				Client_Push(client, fclientEyeAngles, g_hBhopSpeed.FloatValue*2, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+			}
+			else if(buttons & IN_MOVELEFT)
+			{
+				fclientEyeAngles[1] += 45.0;
+				Client_Push(client, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+			}
+			else if(buttons & IN_MOVERIGHT)
+			{
+				fclientEyeAngles[1] += -45.0;
+				Client_Push(client, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
+			}
+			else
 			{
 				Client_Push(client, fclientEyeAngles, g_hBhopSpeed.FloatValue, VelocityOverride:{VelocityOvr_None,VelocityOvr_None,VelocityOvr_None});
 			}
@@ -281,7 +297,7 @@ public Action L4D_OnVomitedUpon(int victim, int &attacker, bool &boomerExplosion
 				GetClientEyePosition(i, targetEyePos);
 				eyePos[2] = targetEyePos[2] = 0.0;
 				dist = GetVectorDistance(eyePos, targetEyePos);
-				if (dist <= g_hVomitRange.FloatValue + 100.0)
+				if (dist <= g_hVomitMaxDamageDist.FloatValue)
 				{
 					Handle trace = TR_TraceRayFilterEx(eyePos, targetEyePos, MASK_VISIBLE, RayType_EndPoint, TR_RayFilter, attacker);
 					if (!TR_DidHit(trace) || TR_GetEntityIndex(trace) == i)
@@ -389,7 +405,7 @@ void ComputeAimAngles(int client, int target, float angles[3], AimType type = Ai
 		{
 			GetClientAbsOrigin(i, targetPos);
 			GetClientEyePosition(i, targetEyePos);
-			if (GetVectorDistance(selfPos, targetPos) <= g_hVomitRange.FloatValue + 100.0)
+			if (GetVectorDistance(selfPos, targetPos) <= g_hVomitMaxDamageDist.FloatValue)
 			{
 				Handle hTrace = TR_TraceRayFilterEx(eyePos, targetEyePos, MASK_VISIBLE, RayType_EndPoint, TR_RayFilter, client);
 				if (!TR_DidHit(hTrace) || TR_GetEntityIndex(hTrace) == i) { bile_target[client][index++] = i; }
@@ -449,7 +465,7 @@ void ComputeAimAngles(int client, int target, float angles[3], AimType type = Ai
 		{
 			GetClientAbsOrigin(i, target_pos);
 			GetClientEyePosition(i, target_eye_pos);
-			if (GetVectorDistance(self_pos, target_pos) <= g_hVomitRange.FloatValue + 100.0)
+			if (GetVectorDistance(self_pos, target_pos) <= g_hVomitMaxDamageDist.FloatValue)
 			{
 				// 判断可视性
 				Handle hTrace = TR_TraceRayFilterEx(self_eye_pos, target_eye_pos, MASK_VISIBLE, RayType_EndPoint, TR_RayFilter, attacker);
