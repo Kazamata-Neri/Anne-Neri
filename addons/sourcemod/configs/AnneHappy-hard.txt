@@ -237,18 +237,6 @@
 		{
 			"message" "关闭Tank连跳"
 		}
-		"exec vote/spit/spit_1_2.cfg"
-		{
-			"message" "1次2血口水伤害"
-		}
-		"exec vote/spit/spit_2_5.cfg"
-		{
-			"message" "2次5血口水伤害(默认)"
-		}
-		"exec vote/spit/spit_1_3.cfg"
-		{
-			"message" "1次3血口水伤害"
-		}
 		"exec vote/si_neri.cfg"
 		{
 			"message" "新版本特感ai(默认)"
@@ -256,6 +244,18 @@
 		"exec vote/si_old.cfg"
 		{
 			"message" "老版本特感ai"
+		}
+		"exec vote/si_neri_eazy.cfg"
+		{
+			"message" "简单版本特感ai"
+		}
+		"exec vote/jk/jockey_normal.cfg"
+		{
+			"message" "普通のjockey"
+		}
+		"exec vote/jk/jockey_crazy.cfg"
+		{
+			"message" "凶狠のjockey(默认)"
 		}
 		"exec vote/ht/ht_fly_normal.cfg"
 		{
@@ -277,14 +277,6 @@
 		{
 			"message" "变态のhunter"
 		}
-		"exec vote/jk/jockey_normal.cfg"
-		{
-			"message" "普通のjockey"
-		}
-		"exec vote/jk/jockey_crazy.cfg"
-		{
-			"message" "凶狠のjockey(默认)"
-		}
 		"exec vote/si_level_normal.cfg"
 		{
 			"message" "普通の特感"
@@ -292,6 +284,18 @@
 		"exec vote/si_level_hard.cfg"
 		{
 			"message" "一键加强特感"
+		}
+		"exec vote/spit/spit_1_2.cfg"
+		{
+			"message" "1次2血口水伤害"
+		}
+		"exec vote/spit/spit_2_5.cfg"
+		{
+			"message" "2次5血口水伤害(默认)"
+		}
+		"exec vote/spit/spit_1_3.cfg"
+		{
+			"message" "1次3血口水伤害"
 		}
 	}
 	"难度调整"

@@ -201,17 +201,9 @@
 		{
 			"message" "老版本特感ai"
 		}
-		"exec vote/ht/ht_fly_normal.cfg"
+		"exec vote/si_neri_eazy.cfg"
 		{
-			"message" "平飞のhunter(默认)"
-		}
-		"exec vote/ht/ht_fly_low.cfg"
-		{
-			"message" "低飞のhunter"
-		}
-		"exec vote/ammo/Null.cfg"
-		{
-			"message" "强迫症的福音"
+			"message" "简单版本特感ai"
 		}
 		"exec vote/jk/jockey_normal.cfg"
 		{
@@ -220,6 +212,14 @@
 		"exec vote/jk/jockey_crazy.cfg"
 		{
 			"message" "凶狠のjockey(默认)"
+		}
+		"exec vote/ht/ht_fly_normal.cfg"
+		{
+			"message" "平飞のhunter(默认)"
+		}
+		"exec vote/ht/ht_fly_low.cfg"
+		{
+			"message" "低飞のhunter"
 		}
 		"exec vote/ht/hunter_normal.cfg"
 		{

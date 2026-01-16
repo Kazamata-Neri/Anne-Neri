@@ -257,6 +257,10 @@
 		{
 			"message" "老版本特感ai"
 		}
+		"exec vote/si_neri_eazy.cfg"
+		{
+			"message" "简单版本特感ai"
+		}
 		"exec vote/jk/jockey_normal.cfg"
 		{
 			"message" "普通のjockey(默认)"
@@ -264,10 +268,6 @@
 		"exec vote/jk/jockey_crazy.cfg"
 		{
 			"message" "凶狠のjockey"
-		}
-		"exec vote/ammo/Null.cfg"
-		{
-			"message" "强迫症的福音"
 		}
 		"exec vote/ht/ht_fly_normal.cfg"
 		{
