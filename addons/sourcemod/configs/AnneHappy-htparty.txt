@@ -328,29 +328,6 @@
 			"message" "关闭特感血条"
 		}
 	}
-	"人数调整"
-	{
-		"exec vote/players/3.cfg"
-		{
-			"message" "3人运动"
-		}
-		"exec vote/players/4.cfg"
-		{
-			"message" "4人运动"
-		}
-		"exec vote/players/5.cfg"
-		{
-			"message" "5人运动"
-		}
-		"exec vote/players/6.cfg"
-		{
-			"message" "6人运动"
-		}
-		"exec vote/players/off.cfg"
-		{
-			"message" "关闭多人运动"
-		}
-	}
 	"mixmap插件开关(失效中)"
 	{
 		"exec vote/mixmap/mix_on.cfg"

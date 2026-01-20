@@ -291,19 +291,19 @@
 	}
 	"人数调整"
 	{
-		"exec vote/players/3.cfg"
+		"exec vote/players/no_zombie_3.cfg"
 		{
 			"message" "3人运动"
 		}
-		"exec vote/players/4.cfg"
+		"exec vote/players/no_zombie_4.cfg"
 		{
 			"message" "4人运动"
 		}
-		"exec vote/players/5.cfg"
+		"exec vote/players/no_zombie_5.cfg"
 		{
 			"message" "5人运动"
 		}
-		"exec vote/players/6.cfg"
+		"exec vote/players/no_zombie_6.cfg"
 		{
 			"message" "6人运动"
 		}
