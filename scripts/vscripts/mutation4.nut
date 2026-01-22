@@ -24,6 +24,9 @@ DirectorOptions <-
 
 	//用于是否藏特	1=不藏特/0 = 藏特
 	cm_AggressiveSpecials = 1
+
+	PreferredMobDirection = SPAWN_IN_FRONT_OF_SURVIVORS
+	PreferredSpecialDirection = SPAWN_IN_FRONT_OF_SURVIVORS
 }
 
 MapData <-{
