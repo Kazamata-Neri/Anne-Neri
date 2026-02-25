@@ -74,7 +74,11 @@
 		}
 		"Mutation4"
 		{
-			"name" "绝境12特(三方用)"
+			"name" "绝境12特(三方摸鱼版)"
+		}
+		"Mutation4_hard"
+		{
+			"name" "绝境12特(常规组队版)"
 		}
 		"coop-8t5s"
 		{
