@@ -46,9 +46,9 @@ MapData <-{
 
 function Update()
 {
-	local htlm = Convars.GetStr("survival_max_specials");
-	local time = Convars.GetStr("director_special_respawn_interval");
-	switch (htlm) {
+	local max_specials = Convars.GetStr("survival_max_specials");
+	local special_respawn_interval = Convars.GetFloat("director_special_respawn_interval");
+	switch (max_specials) {
 	case "6":
 		MapData.g_nSI = 6
 		MapData.g_nHUNTER = 2
@@ -266,41 +266,9 @@ function Update()
 		MapData.g_nBOOMER = 2
 		break;
 	}
-	switch (time) {
-	case "0":
-		MapData.g_nSRI = 0
-		break;
-	case "5":
-		MapData.g_nSRI = 5
-		break;
-	case "10":
-		MapData.g_nSRI = 10
-		break;
-	case "15":
-		MapData.g_nSRI = 15
-		break;
-	case "20":
-		MapData.g_nSRI = 20
-		break;
-	case "25":
-		MapData.g_nSRI = 25
-		break;
-	case "30":
-		MapData.g_nSRI = 30
-		break;
-	case "35":
-		MapData.g_nSRI = 35
-		break;
-	case "40":
-		MapData.g_nSRI = 40
-		break;
-	case "45":
-		MapData.g_nSRI = 45
-		break;
-	default:
-		MapData.g_nSRI = 5
-		break;
-	}
+
+	MapData.g_nSRI = special_respawn_interval
+
 	//DirectorOptions.DominatorLimit = MapData.g_nSI
 	DirectorOptions.cm_BaseSpecialLimit = MapData.g_nSI
 	DirectorOptions.cm_MaxSpecials = MapData.g_nSI

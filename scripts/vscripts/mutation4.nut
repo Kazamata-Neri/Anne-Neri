@@ -49,10 +49,10 @@ MapData <-{
 
 function Update()
 {
-	local htlm = Convars.GetStr("survival_max_specials");
-	local time = Convars.GetStr("director_special_respawn_interval");
-	local relaxmaxflow = Convars.GetFloat("director_relax_max_flow_travel");
-	switch (htlm) {
+	local max_specials = Convars.GetStr("survival_max_specials");
+	local special_respawn_interval = Convars.GetFloat("director_special_respawn_interval");
+	local relax_max_flow_travel = Convars.GetFloat("director_relax_max_flow_travel");
+	switch (max_specials) {
 ////////////////////////////////战役写实部分////////////////////////////////
 	case "2":
 		MapData.g_nBSI = 3
@@ -354,43 +354,8 @@ function Update()
 		break;
 	}
 
-	switch (time) {
-	case "0":
-		MapData.g_nSRI = 0
-		break;
-	case "5":
-		MapData.g_nSRI = 5
-		break;
-	case "10":
-		MapData.g_nSRI = 10
-		break;
-	case "15":
-		MapData.g_nSRI = 15
-		break;
-	case "20":
-		MapData.g_nSRI = 20
-		break;
-	case "25":
-		MapData.g_nSRI = 25
-		break;
-	case "30":
-		MapData.g_nSRI = 30
-		break;
-	case "35":
-		MapData.g_nSRI = 35
-		break;
-	case "40":
-		MapData.g_nSRI = 40
-		break;
-	case "45":
-		MapData.g_nSRI = 45
-		break;
-	default:
-		MapData.g_nSRI = 5
-		break;
-	}
-
-	MapData.g_nRMFT = relaxmaxflow
+	MapData.g_nSRI = special_respawn_interval
+	MapData.g_nRMFT = relax_max_flow_travel
 
 	//DirectorOptions.DominatorLimit = MapData.g_nSI
 	DirectorOptions.cm_BaseSpecialLimit = MapData.g_nBSI
