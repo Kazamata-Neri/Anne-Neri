@@ -217,15 +217,15 @@
 		{
 			"message" "战役模式"
 		}
-		"sm_fm Mutation4"
+		"sm_fm Mutation4-normal"
 		{
 			"message" "绝境12特(三方摸鱼版)"
 		}
-		"sm_fm Mutation4_hard"
+		"sm_fm Mutation4-hard"
 		{
 			"message" "绝境12特(常规组队版)"
 		}
-		"sm_fm coop-8t5s"
+		"sm_fm coop-8t5s-normal"
 		{
 			"message" "战役8特5秒(三方摸鱼版)"
 		}

@@ -89,15 +89,15 @@
 	}
 	"刷新时间"
 	{
-		"exec vote/Mutation4_eazy.cfg"
+		"exec vote/mutation4/Mutation4_eazy.cfg"
 		{
 			"message" "特感刷新正常(默认)"
 		}
-		"exec vote/Mutation4_middle.cfg"
+		"exec vote/mutation4/Mutation4_middle.cfg"
 		{
 			"message" "特感刷新加速"
 		}
-		"exec vote/Mutation4_hard.cfg"
+		"exec vote/mutation4/Mutation4_hard.cfg"
 		{
 			"message" "特感刷新极速"
 		}
@@ -174,15 +174,15 @@
 		{
 			"message" "战役模式"
 		}
-		"sm_fm Mutation4"
+		"sm_fm Mutation4-normal"
 		{
 			"message" "绝境12特(三方摸鱼版)"
 		}
-		"sm_fm Mutation4_hard"
+		"sm_fm Mutation4-hard"
 		{
 			"message" "绝境12特(常规组队版)"
 		}
-		"sm_fm coop-8t5s"
+		"sm_fm coop-8t5s-normal"
 		{
 			"message" "战役8特5秒(三方摸鱼版)"
 		}
@@ -240,6 +240,45 @@
 		"exec vote/weapon/Annehappy.cfg"
 		{
 			"message" "AnneHappy枪械(默认)"
+		}
+	}
+	"推进码数"
+	{
+		"exec vote/mutation4/Mutation4_Relax_Max_Flow_3000.cfg"
+		{
+			"message" "推进码数3000码(默认)"
+		}
+		"exec vote/mutation4/Mutation4_Relax_Max_Flow_2500.cfg"
+		{
+			"message" "推进码2500码"
+		}
+		"exec vote/mutation4/Mutation4_Relax_Max_Flow_2000.cfg"
+		{
+			"message" "推进码2000码"
+		}
+		"exec vote/mutation4/Mutation4_Relax_Max_Flow_1500.cfg"
+		{
+			"message" "推进码1500码"
+		}
+		"exec vote/mutation4/Mutation4_Relax_Max_Flow_1200.cfg"
+		{
+			"message" "推进码1200码"
+		}
+		"exec vote/mutation4/Mutation4_Relax_Max_Flow_1000.cfg"
+		{
+			"message" "推进码1000码"
+		}
+		"exec vote/mutation4/Mutation4_Relax_Max_Flow_800.cfg"
+		{
+			"message" "推进码800码"
+		}
+		"exec vote/mutation4/Mutation4_Relax_Max_Flow_600.cfg"
+		{
+			"message" "推进码600码"
+		}
+		"exec vote/mutation4/Mutation4_Relax_Max_Flow_400.cfg"
+		{
+			"message" "推进码400码"
 		}
 	}
 	"人数调整"

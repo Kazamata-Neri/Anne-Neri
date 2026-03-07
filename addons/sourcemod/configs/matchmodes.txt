@@ -72,15 +72,15 @@
 		{
 			"name" "战役模式"
 		}
-		"Mutation4"
+		"Mutation4-normal"
 		{
 			"name" "绝境12特(三方摸鱼版)"
 		}
-		"Mutation4_hard"
+		"Mutation4-hard"
 		{
 			"name" "绝境12特(常规组队版)"
 		}
-		"coop-8t5s"
+		"coop-8t5s-normal"
 		{
 			"name" "战役8特5秒(三方摸鱼版)"
 		}

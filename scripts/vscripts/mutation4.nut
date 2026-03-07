@@ -22,6 +22,9 @@ DirectorOptions <-
 	//控制型特感总数
 	DominatorLimit = 28
 
+	//推进码数
+	RelaxMaxFlowTravel = 3000
+
 	//用于是否藏特	1=不藏特/0 = 藏特
 	cm_AggressiveSpecials = 1
 
@@ -40,6 +43,7 @@ MapData <-{
 	g_nBOOMER = 3
 	g_nAS = 1
 	g_nSRI = 5
+	g_nRMFT = 3000
 	last_set = 0
 }
 
@@ -47,6 +51,7 @@ function Update()
 {
 	local htlm = Convars.GetStr("survival_max_specials");
 	local time = Convars.GetStr("director_special_respawn_interval");
+	local relaxmaxflow = Convars.GetFloat("director_relax_max_flow_travel");
 	switch (htlm) {
 ////////////////////////////////战役写实部分////////////////////////////////
 	case "2":
@@ -348,6 +353,7 @@ function Update()
 		MapData.g_nAS = 1
 		break;
 	}
+
 	switch (time) {
 	case "0":
 		MapData.g_nSRI = 0
@@ -383,6 +389,9 @@ function Update()
 		MapData.g_nSRI = 5
 		break;
 	}
+
+	MapData.g_nRMFT = relaxmaxflow
+
 	//DirectorOptions.DominatorLimit = MapData.g_nSI
 	DirectorOptions.cm_BaseSpecialLimit = MapData.g_nBSI
 	DirectorOptions.cm_MaxSpecials = MapData.g_nMSI
@@ -394,6 +403,7 @@ function Update()
 	DirectorOptions.BoomerLimit = MapData.g_nBOOMER
 	DirectorOptions.cm_AggressiveSpecials = MapData.g_nAS
 	DirectorOptions.cm_SpecialRespawnInterval = MapData.g_nSRI
+	DirectorOptions.RelaxMaxFlowTravel = MapData.g_nRMFT
 
 	interval = DirectorOptions.cm_SpecialRespawnInterval
 	if(Time() >= MapData.last_set + interval)
