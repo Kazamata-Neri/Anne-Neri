@@ -87,19 +87,47 @@
 			"message" "28特模式"
 		}
 	}
-	"刷新时间"
+	"复活时间"
 	{
-		"exec vote/mutation4/Mutation4_eazy.cfg"
+		"exec vote/mutation4/Mutation4_Respawn_Time_0.cfg"
 		{
-			"message" "特感刷新正常(默认)"
+			"message" "特感复活时间0秒"
 		}
-		"exec vote/mutation4/Mutation4_middle.cfg"
+		"exec vote/mutation4/Mutation4_Respawn_Time_5.cfg"
 		{
-			"message" "特感刷新加速"
+			"message" "特感复活时间5秒"
 		}
-		"exec vote/mutation4/Mutation4_hard.cfg"
+		"exec vote/mutation4/Mutation4_Respawn_Time_10.cfg"
 		{
-			"message" "特感刷新极速"
+			"message" "特感复活时间10秒"
+		}
+		"exec vote/mutation4/Mutation4_Respawn_Time_15.cfg"
+		{
+			"message" "特感复活时间15秒(默认)"
+		}
+		"exec vote/mutation4/Mutation4_Respawn_Time_20.cfg"
+		{
+			"message" "特感复活时间20秒"
+		}
+		"exec vote/mutation4/Mutation4_Respawn_Time_25.cfg"
+		{
+			"message" "特感复活时间25秒"
+		}
+		"exec vote/mutation4/Mutation4_Respawn_Time_30.cfg"
+		{
+			"message" "特感复活时间30秒"
+		}
+		"exec vote/mutation4/Mutation4_Respawn_Time_35.cfg"
+		{
+			"message" "特感复活时间35秒"
+		}
+		"exec vote/mutation4/Mutation4_Respawn_Time_40.cfg"
+		{
+			"message" "特感复活时间40秒"
+		}
+		"exec vote/mutation4/Mutation4_Respawn_Time_45.cfg"
+		{
+			"message" "特感复活时间45秒"
 		}
 	}
 	"版本选择"
@@ -246,39 +274,39 @@
 	{
 		"exec vote/mutation4/Mutation4_Relax_Max_Flow_3000.cfg"
 		{
-			"message" "推进码数3000码(默认)"
+			"message" "推进码数3000(默认)"
 		}
 		"exec vote/mutation4/Mutation4_Relax_Max_Flow_2500.cfg"
 		{
-			"message" "推进码2500码"
+			"message" "推进码数2500"
 		}
 		"exec vote/mutation4/Mutation4_Relax_Max_Flow_2000.cfg"
 		{
-			"message" "推进码2000码"
+			"message" "推进码数2000"
 		}
 		"exec vote/mutation4/Mutation4_Relax_Max_Flow_1500.cfg"
 		{
-			"message" "推进码1500码"
+			"message" "推进码数1500"
 		}
 		"exec vote/mutation4/Mutation4_Relax_Max_Flow_1200.cfg"
 		{
-			"message" "推进码1200码"
+			"message" "推进码数1200"
 		}
 		"exec vote/mutation4/Mutation4_Relax_Max_Flow_1000.cfg"
 		{
-			"message" "推进码1000码"
+			"message" "推进码数1000"
 		}
 		"exec vote/mutation4/Mutation4_Relax_Max_Flow_800.cfg"
 		{
-			"message" "推进码800码"
+			"message" "推进码数800"
 		}
 		"exec vote/mutation4/Mutation4_Relax_Max_Flow_600.cfg"
 		{
-			"message" "推进码600码"
+			"message" "推进码数600"
 		}
 		"exec vote/mutation4/Mutation4_Relax_Max_Flow_400.cfg"
 		{
-			"message" "推进码400码"
+			"message" "推进码数400"
 		}
 	}
 	"人数调整"
