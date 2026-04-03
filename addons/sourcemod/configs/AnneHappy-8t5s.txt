@@ -307,6 +307,18 @@
 		{
 			"message" "人机跟随(默认)"
 		}
+		"exec vote/tank/tank_custom_music_on.cfg"
+		{
+			"message" "开启克局自定义BGM(包括第三方音乐)"
+		}
+		"exec vote/tank/tank_custom_music_on_official.cfg"
+		{
+			"message" "开启克局自定义BGM(仅官方音乐)"
+		}
+		"exec vote/tank/tank_custom_music_off.cfg"
+		{
+			"message" "关闭克局自定义BGM(默认)"
+		}
 	}
 	"服务器选项"
 	{

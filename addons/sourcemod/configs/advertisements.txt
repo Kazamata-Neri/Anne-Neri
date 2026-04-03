@@ -13,7 +13,7 @@
 	"3"
 	{
 		"type"		"S"
-		"text"		"{LIGHTGREEN}本服务器由{GREEN}音理酱{LIGHTGREEN}提供 {GREEN}树树子{LIGHTGREEN}提供维护和技术支持"
+		"text"		"{LIGHTGREEN}本服务器由{GREEN}音理酱{LIGHTGREEN}提供，{GREEN}树树子{LIGHTGREEN}提供维护和技术支持"
 	}
 	"4"
 	{
@@ -23,7 +23,7 @@
 	"5"
 	{
 		"type"		"S"
-		"text"		"{LIGHTGREEN}为了游戏体验 本组药役建议游戏时间在{GREEN}114514{LIGHTGREEN}小时且充值{GREEN}1919810{LIGHTGREEN}元以上"
+		"text"		"{LIGHTGREEN}为了游戏体验，本组药役建议游戏时间在{GREEN}114{LIGHTGREEN}小时且充值{GREEN}514{LIGHTGREEN}元以上"
 	}
 	"6"
 	{
@@ -33,27 +33,27 @@
 	"7"
 	{
 		"type"		"S"
-		"text"		"{LIGHTGREEN}本服默认{GREEN}2025-07-21{LIGHTGREEN}刷特插件\n提供{GREEN}77{LIGHTGREEN}、{GREEN}1128{LIGHTGREEN}等刷特插件选择"
+		"text"		"{LIGHTGREEN}如果在本服坐牢了，可在投票选项{GREEN}没活硬整{LIGHTGREEN}中开启部分选项来越狱"
 	}
 	"8"
 	{
 		"type"		"S"
-		"text"		"{LIGHTGREEN}如果觉得{GREEN}hunter{LIGHTGREEN}太弱\n可以在{GREEN}难度调整{LIGHTGREEN}中选择更强的{GREEN}hunter{LIGHTGREEN}"
+		"text"		"{LIGHTGREEN}如果觉得{GREEN}特感{LIGHTGREEN}太弱\n可以在{GREEN}难度调整{LIGHTGREEN}中选择更强的{GREEN}特感{LIGHTGREEN}"
 	}
 	"9"
 	{
 		"type"		"S"
-		"text"		"{LIGHTGREEN}近战没必要留给一号位 一号位就是要{GREEN}喷子{LIGHTGREEN}配{GREEN}马格南"
+		"text"		"{LIGHTGREEN}近战没必要留给一号位，一号位就是要{GREEN}喷子{LIGHTGREEN}配{GREEN}马格南"
 	}
 	"10"
 	{
 		"type"		"S"
-		"text"		"{LIGHTGREEN}听说{GREEN}!vote{LIGHTGREEN}里面有很多有趣的东西 为什么不试试呢"
+		"text"		"{LIGHTGREEN}本服包含{GREEN}克局自定义BGM{LIGHTGREEN}插件，可在投票选项{GREEN}没活硬整{LIGHTGREEN}中开启，音频文件可以找{GREEN}铵盐(QQ:2817547366)"
 	}
 	"11"
 	{
 		"type"		"S"
-		"text"		"{LIGHTGREEN}本服包含{GREEN}高难度硬核药役{LIGHTGREEN}模式 听说腐竹自己打都坐牢"
+		"text"		"{LIGHTGREEN}本服包含{GREEN}高难度硬核药役{LIGHTGREEN}模式，听说腐竹自己打都坐牢"
 	}
 	"12"
 	{
