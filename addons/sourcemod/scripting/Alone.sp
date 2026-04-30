@@ -1003,7 +1003,7 @@ int IsBotTypeNeeded()
 	}
 	else if (iType == 5)				//jockey
 	{
-			return 4;
+			return 5;
 	}
 	else if (iType == 6)				//charger
 	{
