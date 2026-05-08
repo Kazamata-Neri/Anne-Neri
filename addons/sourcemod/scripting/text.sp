@@ -4,42 +4,53 @@
 #include <sdkhooks>
 #include <left4dhooks>
 //#include <smlib>
-#define PLUGIN_VERSION	"2021-11-28"			//版本
-new Handle: g_hCvarInfectedTime = INVALID_HANDLE;
-new Handle: g_hCvarInfectedLimit = INVALID_HANDLE;
-new Handle: g_hCvarTankBhop = INVALID_HANDLE;
-new Handle: g_hCvarWeapon = INVALID_HANDLE;
-new Handle:hCvarCoop;
-new CommonLimit; 
-new CommonTime; 
-new TankBhop;
-new Weapon;
-new MaxPlayers;
+
+#define PLUGIN_VERSION	"2025-07-21"			//版本
+
+ConVar g_hCvarInfectedTime;
+ConVar g_hCvarInfectedLimit;
+ConVar g_hCvarTankBhop;
+ConVar g_hCvarWeapon;
+ConVar hCvarCoop;
+
+int CommonLimit; 
+int CommonTime; 
+int TankBhop;
+int Weapon; 
+int MaxPlayers;
+
 //String:sBuffer[256];
+
 public OnPluginStart()
 {
 	g_hCvarInfectedTime = FindConVar("versus_special_respawn_interval");
 	g_hCvarInfectedLimit = FindConVar("l4d_infected_limit");
 	g_hCvarTankBhop = FindConVar("ai_Tank_Bhop");
 	g_hCvarWeapon = CreateConVar("ZonemodWeapon", "0", "", 0, false, 0.0, false, 0.0);
+
 	HookConVarChange(g_hCvarInfectedTime, Cvar_InfectedTime);
 	HookConVarChange(g_hCvarInfectedLimit, Cvar_InfectedLimit);
 	HookConVarChange(g_hCvarTankBhop, CvarTankBhop);
 	HookConVarChange(g_hCvarWeapon, CvarWeapon);
+
 	CommonTime = GetConVarInt(g_hCvarInfectedTime);
 	CommonLimit = GetConVarInt(g_hCvarInfectedLimit);
 	TankBhop = GetConVarInt(g_hCvarTankBhop);
 	Weapon = GetConVarInt(g_hCvarWeapon);
-	RegConsoleCmd("sm_xx",InfectedStatus);
+
 	hCvarCoop = CreateConVar("coopmode", "0");
+
+	RegConsoleCmd("sm_xx",InfectedStatus);
+	RegConsoleCmd("sm_zs", ZiSha);
+	RegConsoleCmd("sm_kill", ZiSha);
+
 	HookEvent("player_incapacitated_start",Incap_Event);
 	HookEvent("player_incapacitated",Incap_Event);
 	HookEvent("round_start", event_RoundStart);
 	HookEvent("player_death", player_death);
-	RegConsoleCmd("sm_zs", ZiSha);
-	RegConsoleCmd("sm_kill", ZiSha);
 }
-public Action:player_death(Handle:event, const String:name[], bool:dontBroadcast)
+
+public Action:player_death(Event event, const char[] name, bool dontBroadcast)
 {
 	if(IsTeamImmobilised())
 	{
@@ -47,7 +58,8 @@ public Action:player_death(Handle:event, const String:name[], bool:dontBroadcast
 	}
 	return Plugin_Continue;
 }
-public Action:ZiSha(client, args)
+
+public Action:ZiSha(int client, int args)
 {
 	ForcePlayerSuicide(client);
 	if(IsTeamImmobilised())
@@ -57,9 +69,10 @@ public Action:ZiSha(client, args)
 	return Plugin_Handled;
 }
 
-public Incap_Event(Handle:event, const String:name[], bool:dontBroadcast)
+public Incap_Event(Event event, const char[] name, bool dontBroadcast)
 {
 	new Incap = GetClientOfUserId(GetEventInt(event, "userid"));
+	// 开启死门
 	if(bool:GetConVarBool(hCvarCoop))
 	{
 		ForcePlayerSuicide(Incap);
@@ -69,41 +82,42 @@ public Incap_Event(Handle:event, const String:name[], bool:dontBroadcast)
 		SetConVarString(FindConVar("mp_gamemode"), "realism");
 	}
 }
+
 //离开安全门重新加载插件（理论上不应该在此插件完成）
 public Action L4D_OnFirstSurvivorLeftSafeArea(int client)
 {
 	ReloadPlugins();
+	return Plugin_Continue;
 }
-public Cvar_InfectedTime( Handle:cvar, const String:oldValue[], const String:newValue[] ) 
+
+public Cvar_InfectedTime(ConVar cvar, const char[] oldValue, const char[] newValue) 
 {
-	CommonTime = GetConVarInt(g_hCvarInfectedTime);
+	CommonTime = g_hCvarInfectedTime.IntValue;
 	ReloadPlugins();
 }
-public Cvar_InfectedLimit( Handle:cvar, const String:oldValue[], const String:newValue[] ) 
+
+public Cvar_InfectedLimit(ConVar cvar, const char[] oldValue, const char[] newValue) 
 {
-	CommonLimit = GetConVarInt(g_hCvarInfectedLimit);
+	CommonLimit = g_hCvarInfectedLimit.IntValue;
 }
-public CvarTankBhop( Handle:cvar, const String:oldValue[], const String:newValue[] ) 
+
+public CvarTankBhop(ConVar cvar, const char[] oldValue, const char[] newValue) 
 {
-	TankBhop = GetConVarInt(g_hCvarTankBhop);
+	TankBhop = g_hCvarTankBhop.IntValue;
 }
-public CvarWeapon( Handle:cvar, const String:oldValue[], const String:newValue[] ) 
+
+public CvarWeapon(ConVar cvar, const char[] oldValue, const char[] newValue) 
 {
-	Weapon = GetConVarInt(g_hCvarWeapon);
-	if (Weapon == 0)
+	Weapon = g_hCvarWeapon.IntValue;
+	switch (Weapon)
 	{
-		ServerCommand("exec vote/weapon/Annehappy.cfg");
-	}
-	else if(Weapon == 1)
-	{
-		ServerCommand("exec vote/weapon/zonemod.cfg");
-	}
-	else if(Weapon == 2)
-	{
-		ServerCommand("exec vote/weapon/Neri.cfg");
+		case 0: ServerCommand("exec vote/weapon/Annehappy.cfg");
+		case 1: ServerCommand("exec vote/weapon/zonemod.cfg");
+		case 2: ServerCommand("exec vote/weapon/Neri.cfg");
 	}
 }
-public Action:InfectedStatus(int Client, args)
+
+public Action InfectedStatus(int Client, int args)
 { 
 	//FormatTime(sBuffer, sizeof(sBuffer), "%Y/%m/%d");
 	if(IsValidPlayer(Client, false))
@@ -112,42 +126,40 @@ public Action:InfectedStatus(int Client, args)
 		{
 			if(Weapon == 0)
 			{
-				PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+				PrintToChatAll("\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
 			else if(Weapon == 1)
 			{
-				PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+				PrintToChatAll("\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
 			else if(Weapon == 2)
 			{
-				PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Neri\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+				PrintToChatAll("\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Neri\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
 		}
 		else
 		{
 			if(Weapon == 0)
 			{
-				PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+				PrintToChatAll("\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
 			else if(Weapon == 1)
 			{
-				PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+				PrintToChatAll("\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
 			else if(Weapon == 2)
 			{
-				PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Neri\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+				PrintToChatAll("\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Neri\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
 		}
 	}
 	if(GetConVarInt(FindConVar("ReturnBlood"))>0)
-		PrintToChat(Client,"\x03回血\x05[\x04开启\x05]");
-	if(GetConVarInt(FindConVar("ai_TankConsume"))>0)
-			PrintToChat(Client,"\x03坦克消耗\x05[\x04开启\x05]");
+		PrintToChatAll("\x03回血\x05[\x04开启\x05]");
 	return Plugin_Handled;
 }
-public event_RoundStart(Handle:event, const String:name[], bool:dontBroadcast)
+
+public event_RoundStart(Event event, const char[] name, bool dontBroadcast)
 {
-	ServerCommand("sm plugins load_unlock");
 	//FormatTime(sBuffer, sizeof(sBuffer), "%Y/%m/%d");
 	if(TankBhop > 0)
 	{
@@ -181,9 +193,8 @@ public event_RoundStart(Handle:event, const String:name[], bool:dontBroadcast)
 	}
 	if(GetConVarInt(FindConVar("ReturnBlood"))>0)
 		PrintToChatAll("\x03回血\x05[\x04开启\x05]");
-	if(GetConVarInt(FindConVar("ai_TankConsume"))>0)
-		PrintToChatAll("\x03坦克消耗\x05[\x04开启\x05]");
 }
+
 public OnClientPutInServer(int Client)
 {
 	//FormatTime(sBuffer, sizeof(sBuffer), "%Y/%m/%d");
@@ -199,39 +210,38 @@ public OnClientPutInServer(int Client)
 		{
 			if(Weapon == 0)
 			{
-				PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+				PrintToChatAll("\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
 			else if(Weapon == 1)
 			{
-				PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+				PrintToChatAll("\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
 			else if(Weapon == 2)
 			{
-				PrintToChat(Client,"\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Neri\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+				PrintToChatAll("\x03Tank连跳\x05[\x04开启\x05] \x03武器\x05[\x04Neri\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
 		}
 		else
 		{
 			if(Weapon == 0)
 			{
-				PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+				PrintToChatAll("\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Anne\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
 			else if(Weapon == 1)
 			{
-				PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+				PrintToChatAll("\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Zone\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
 			else if(Weapon == 2)
 			{
-				PrintToChat(Client,"\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Neri\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
+				PrintToChatAll("\x03Tank连跳\x05[\x04关闭\x05] \x03武器\x05[\x04Neri\x05] \x03特感\x05[\x04%i特%i秒\x05] \x03星空列车与白的旅行\x05[\x04%s\x05]",CommonLimit,CommonTime,PLUGIN_VERSION);
 			}
 		}
 		if(GetConVarInt(FindConVar("ReturnBlood"))>0)
-			PrintToChat(Client,"\x03回血\x05[\x04开启\x05]");
-		if(GetConVarInt(FindConVar("ai_TankConsume"))>0)
-			PrintToChat(Client,"\x03坦克消耗\x05[\x04开启\x05]");
+			PrintToChatAll("\x03回血\x05[\x04开启\x05]");
 	}
 }
-stock bool:IsValidPlayer(Client, bool:AllowBot = true, bool:AllowDeath = true)
+
+stock bool:IsValidPlayer(int Client, bool AllowBot = true, bool AllowDeath = true)
 {
 	if (Client < 1 || Client > MaxClients)
 		return false;
@@ -256,10 +266,6 @@ ReloadPlugins()
 	ServerCommand("sm plugins load_unlock");
 	ServerCommand("sm plugins reload optional/infected_control_77.smx");
 	ServerCommand("sm plugins reload optional/infected_control_1128.smx");
-	ServerCommand("sm plugins reload optional/hunters.smx");
-	ServerCommand("sm plugins reload optional/Jockeys.smx");
-	ServerCommand("sm plugins reload optional/Allcharger.smx");
-	ServerCommand("sm plugins reload optional/Alone.smx");
 	ServerCommand("sm plugins reload optional/Alone_sea.smx");
 	ServerCommand("sm plugins load_lock");
 	ServerCommand("sm_startspawn");
@@ -268,8 +274,9 @@ ReloadPlugins()
 
 bool:IsTeamImmobilised() {
 	//Check if there is still an upright survivor
-	new bool:bIsTeamImmobilised = true;
-	for (new client = 1; client < MaxClients; client++) {
+	bool bIsTeamImmobilised = true;
+	for (int client = 1; client < MaxClients; client++)
+	{
 		// If a survivor is found to be alive and neither pinned nor incapacitated
 		// team is not immobilised.
 		if (Survivor(client) && IsPlayerAlive(client) ) 
@@ -282,14 +289,17 @@ bool:IsTeamImmobilised() {
 	}
 	return bIsTeamImmobilised;
 }
-stock bool:Survivor(i)
+
+bool Survivor(i)
 {
     return i > 0 && i <= MaxClients && IsClientInGame(i) && GetClientTeam(i) == 2;
 }
-stock bool:Incapacitated(client)
+
+bool Incapacitated(client)
 {
-	new bool:bIsIncapped = false;
-	if (Survivor(client)) {
+	bool bIsIncapped = false;
+	if (Survivor(client))
+	{
 		if (GetEntProp(client, Prop_Send, "m_isIncapacitated") > 0) bIsIncapped = true;
 		if (!IsPlayerAlive(client)) bIsIncapped = true;
 	}

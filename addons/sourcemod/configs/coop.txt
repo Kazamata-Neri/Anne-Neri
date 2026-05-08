@@ -169,6 +169,14 @@
 		{
 			"message" "3倍备弹"
 		}
+		"exec vote/weapon/coop.cfg"
+		{
+			"message" "战役枪械(默认)"
+		}
+		"exec vote/weapon/Annehappy.cfg"
+		{
+			"message" "AnneHappy枪械"
+		}
 	}
 	"人数调整"
 	{
