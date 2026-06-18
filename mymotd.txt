@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
 </head>
-<body style="background-image: url(https://s21.ax1x.com/2024/06/14/pkdds1I.jpg);background-repeat : no-repeat;background-size:100%;background-attachment: fixed;">
+<body style="background-image: url(https://i.imgs.ovh/2026/06/04/a8a888bc0d5e6e4662267345af20f23a.jpg);background-repeat : no-repeat;background-size:100%;background-attachment: fixed;">
 <table width="100%" border="1">
 </table>
 </body>
