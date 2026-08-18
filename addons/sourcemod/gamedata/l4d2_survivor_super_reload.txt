@@ -1,0 +1,27 @@
+"Games"
+{
+	"left4dead2"
+	{
+		"Offsets"
+		{
+			"CTerrorGun::FinishReload"
+			{
+				"windows"	"279"
+				"linux"		"280"
+			}
+			"CTerrorGun::Reload"
+			{
+				"windows"	"281"
+				"linux"		"282"
+			}
+		}
+		"Signatures"
+		{
+			"CBaseCombatWeapon::FinishReload"
+			{
+				"library"		"server"
+				"linux"			"@_ZN17CBaseCombatWeapon12FinishReloadEv"
+			}
+		}
+	}
+}

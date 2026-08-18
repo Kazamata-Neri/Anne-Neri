@@ -275,11 +275,11 @@
 		}
 		"exec vote/ht/hunter_crazy.cfg"
 		{
-			"message" "灵活のhunter(默认)"
+			"message" "灵活のhunter"
 		}
 		"exec vote/ht/hunter_hentai.cfg"
 		{
-			"message" "变态のhunter"
+			"message" "变态のhunter(默认)"
 		}
 		"exec vote/si_level_normal.cfg"
 		{
