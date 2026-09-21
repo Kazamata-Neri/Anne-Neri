@@ -74,6 +74,13 @@
 		
 		"Offsets"
 		{
+			//  Member of PathFollower, offset 4 * 4566
+			"PathFollower::m_goal"
+			{
+				"windows"	"18264"
+				"linux"		"18264"
+			}
+
 			"INextBot::GetNextBotCombatCharacter"
 			{
 				"windows"	"44"
@@ -85,6 +92,12 @@
 				"windows"	"8"
 				"linux"		"9"
 			}
+
+			"Path::Invalidate"
+			{
+				"windows"	"17"
+				"linux"		"18"
+			}
 			
 			"Path::NextSegment"
 			{
@@ -92,6 +105,12 @@
 				"linux"		"22"
 			}
 			
+			"Path::PriorSegment"
+			{
+				"windows"	"22"
+				"linux"		"23"
+			}
+
 			"Path::LastSegment"
 			{
 				"windows"	"23"

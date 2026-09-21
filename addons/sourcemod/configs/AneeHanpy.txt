@@ -245,14 +245,6 @@
 	}
 	"特感调整"
 	{
-		"sm_cvar ai_Tank_Bhop 1"
-		{
-			"message" "开启Tank连跳"
-		}
-		"sm_cvar ai_Tank_Bhop 0"
-		{
-			"message" "关闭Tank连跳(默认)"
-		}
 		"exec vote/si_neri.cfg"
 		{
 			"message" "新版本特感ai(默认)"
@@ -260,18 +252,6 @@
 		"exec vote/si_old.cfg"
 		{
 			"message" "老版本特感ai"
-		}
-		"exec vote/si_neri_eazy.cfg"
-		{
-			"message" "简单版本特感ai"
-		}
-		"exec vote/ht/ht_fly_normal.cfg"
-		{
-			"message" "平飞のhunter(默认)"
-		}
-		"exec vote/ht/ht_fly_low.cfg"
-		{
-			"message" "低飞のhunter"
 		}
 		"exec vote/ht/hunter_normal.cfg"
 		{
@@ -285,13 +265,13 @@
 		{
 			"message" "变态のhunter"
 		}
-		"exec vote/jk/jockey_normal.cfg"
+		"exec vote/ht/ht_fly_normal.cfg"
 		{
-			"message" "普通のjockey"
+			"message" "平飞のhunter(默认)"
 		}
-		"exec vote/jk/jockey_crazy.cfg"
+		"exec vote/ht/ht_fly_low.cfg"
 		{
-			"message" "凶狠のjockey(默认)"
+			"message" "低飞のhunter"
 		}
 		"exec vote/si_level_normal.cfg"
 		{
